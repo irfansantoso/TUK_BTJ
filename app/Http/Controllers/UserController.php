@@ -19,6 +19,8 @@ use App\Models\TrHeaderTpnOut;
 use App\Models\TrHistory;
 use App\Models\TrDetailPosition;
 use App\Exports\UserExport;
+use App\Exports\UserExport_1;
+use App\Exports\UserExport_1_1;
 use App\Exports\UserExport_2;
 use App\Exports\UserExport_3;
 use App\Exports\UserExport_4;
@@ -1330,6 +1332,36 @@ class UserController extends Controller
         }
     }
 
+    public function trDetailTpnAqua_editforuser(Request $request)
+    {
+        DB::beginTransaction();
+        try{        
+            TrDetailTpn::where('no_btg', $request->no_btg)
+                      ->update(['pjg' => $request->pjg,
+                                'pkl' => $request->pkl,
+                                'ujg' => $request->ujg,
+                                'rt2' => $request->rt2,
+                                'cct' => $request->cct,
+                                'pcct' => $request->pcct,
+                                'vol' => $request->vol,
+                                'petak' => $request->petak,
+                                'kelas' => $request->kelas,
+                                'user_updated_tpn' => Auth::user()->name,
+                                'updatedAt' => date('Y-m-d H:i:s'),
+                                ]);
+            TrHistory::where('no_btg', $request->no_btg)
+                      ->update(['vol' => $request->vol,
+                                'petak' => $request->petak,
+                                'kelas' => $request->kelas,
+                                ]);
+            DB::commit();
+            return redirect()->route('trDetailTpnAqua',[$request->id_header_tpn_in])->with('success', 'Edit data sukses!');
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->route('trDetailTpnAqua',[$request->id_header_tpn_in])->with('error', 'There is some problem, please try again or call your admin!');
+        }
+    }
+
     public function trDetailTpnAqua_del(Request $request)
     {
         DB::beginTransaction();
@@ -1541,6 +1573,20 @@ class UserController extends Controller
                 }else{
                     $trDetailTpnAquaOut->save();
                     $trHistory->save();
+                    //-----------query delete duplicate table------------
+                    $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                        FROM tr_detail_position as n 
+                        WHERE n.position='current'
+                        GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                        HAVING COUNT(*) > 1) x)
+                        ");
+                    $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                        FROM tr_history as n 
+                        WHERE n.position='IN'
+                        GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                        HAVING COUNT(*) > 1) x)
+                        "); 
+                    //------------------------------------------------------                
                     DB::commit();
                     return redirect()->route('trDetailTpnAquaOut',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                 }
@@ -1800,6 +1846,20 @@ class UserController extends Controller
                     }else{
                         $trDetailTpk49OutLSD->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailTpk49OutLSD',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -2060,6 +2120,20 @@ class UserController extends Controller
                     }else{
                         $trDetailTpkAquaOutLSD->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailTpkAquaOutLSD',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -2320,6 +2394,20 @@ class UserController extends Controller
                     }else{
                         $trDetailSangaiDrtOutSangaiAir->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailSangaiDrtOutSangaiAir',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -2580,6 +2668,20 @@ class UserController extends Controller
                     }else{
                         $trDetailSangaiAirOutTanjung->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailSangaiAirOutTanjung',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -2842,6 +2944,20 @@ class UserController extends Controller
                     }else{
                         $trDetailSangaiAirOutHanj->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailSangaiAirOutHanj',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -3105,6 +3221,20 @@ class UserController extends Controller
                     }else{
                         $trDetailSangaiDrtOutTanjung->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailSangaiDrtOutTanjung',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -3365,6 +3495,20 @@ class UserController extends Controller
                     }else{
                         $trDetailTanjungOutKabuauDrt->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailTanjungOutKabuauDrt',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -3625,6 +3769,20 @@ class UserController extends Controller
                     }else{
                         $trDetailKabuauDrtOutKabuauAir->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailKabuauDrtOutKabuauAir',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -3884,6 +4042,20 @@ class UserController extends Controller
                     }else{
                         $trDetailKabuauAirOutHanj->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailKabuauAirOutHanj',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -4126,6 +4298,20 @@ class UserController extends Controller
                     }else{
                         $trDetailKabuauAirOutTongkang->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailKabuauAirOutTongkang',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -4368,6 +4554,20 @@ class UserController extends Controller
                     }else{
                         $trDetailKabuauDrtOutTongkang->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailKabuauDrtOutTongkang',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -4610,6 +4810,20 @@ class UserController extends Controller
                     }else{
                         $trDetailHanjaOutTongkang->save();
                         $trHistory->save();
+                        //-----------query delete duplicate table------------
+                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
+                            FROM tr_detail_position as n 
+                            WHERE n.position='current'
+                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
+                            HAVING COUNT(*) > 1) x)
+                            ");
+                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
+                            FROM tr_history as n 
+                            WHERE n.position='IN'
+                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
+                            HAVING COUNT(*) > 1) x)
+                            "); 
+                        //------------------------------------------------------ 
                         DB::commit();
                         return redirect()->route('trDetailHanjaOutTongkang',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
                     }
@@ -4880,6 +5094,7 @@ class UserController extends Controller
 
         $getKy = TrDetailTpn::where('hph', $hph)
                             ->where('lokasi_tpn',$lok)
+                            ->where('tgl_input_tpn','<=',$tgl_laporan)
                             // ->whereBetween('tgl_input_tpn', [$stDt, $eDt])
                             ->where('jns_kayu',$jnsKy)
                             ->where('position','current')
@@ -4903,6 +5118,7 @@ class UserController extends Controller
 
         $getVol = TrDetailTpn::where('hph', $hph)
                             ->where('lokasi_tpn',$lok)
+                            ->where('tgl_input_tpn','<=',$tgl_laporan)
                             // ->whereBetween('tgl_input_tpn', [$stDt, $eDt])
                             ->where('jns_kayu',$jnsKy)
                             ->where('position','current')
@@ -4933,6 +5149,7 @@ class UserController extends Controller
                                 ->where('tr_detail_position.to_lokasi',$lok)
                                 // ->whereBetween('tr_detail_position.tgl_input', [$stDt, $eDt])
                                 ->where('tdti.jns_kayu',$jnsKy)
+                                ->where('tgl_input','<=',$tgl_laporan)
                                 ->where('tr_detail_position.position','current')
                                 ->get(['tr_detail_position.no_btg']);
 
@@ -4957,6 +5174,7 @@ class UserController extends Controller
                                 ->where('tr_detail_position.to_lokasi',$lok)
                                 // ->whereBetween('tr_detail_position.tgl_input', [$stDt, $eDt])
                                 ->where('tdti.jns_kayu',$jnsKy)
+                                ->where('tgl_input','<=',$tgl_laporan)
                                 ->where('tr_detail_position.position','current')
                                 ->sum('tdti.vol');
         if($getVol > 0) {
@@ -4970,6 +5188,190 @@ class UserController extends Controller
             return $number;
         }
     }
+
+    // ----------------------------- rptStokPerThn ----------------
+
+    public function rptStokPerThn_rpt(Request $request)
+    {   
+
+        $stDt = date("d-m-Y", strtotime($request->tgl_laporan_d));
+        $etDt = date("d-m-Y", strtotime($request->tgl_laporan_s));
+        // $thnProd = date("Y", strtotime($request->thn_produksi));
+
+        // $eDt = date("d-m-Y", strtotime($endDt));
+
+        if($request->jnsLap == "xls")
+        {
+            $fileNm = "STOK KAYU ".$request->hph." ".$stDt." sampai ".$etDt.".xlsx";
+            return Excel::download(new UserExport_1($request->hph,$request->tgl_laporan_d,$request->tgl_laporan_s,$request->thn_produksi), $fileNm);
+        }else{
+            return redirect()->route('rptStokPerThn',[$request->hph])
+                            ->with('hph', $request->hph)
+                            ->with('tgl_laporan_d', $request->tgl_laporan_d)
+                            ->with('tgl_laporan_s', $request->tgl_laporan_s)
+                            ->with('thn_produksi', $request->thn_produksi);
+        }
+    }
+
+    public function rptStokPerThn(Request $request)
+    {
+
+        $data['title'] = 'Stok Kayu Per Tahun';
+        return view('reporting/rptStokPerThn', $data);
+    }
+
+    public static function getQtyKayuTpnStokPerThn($hph,$tgl_laporan_d,$tgl_laporan_s,$thnProd,$lok,$jnsKy)
+    {
+
+        $getKy = TrDetailTpn::where('hph', $hph)
+                            ->where('lokasi_tpn',$lok)
+                            // ->where('tgl_input_tpn','>=',$tgl_laporan_d)
+                            // ->where('tgl_input_tpn','<=',$tgl_laporan_s)
+                            ->whereBetween('tgl_input_tpn', [$tgl_laporan_d, $tgl_laporan_s])
+                            ->where('jns_kayu',$jnsKy)
+                            ->where('thn_produksi_tpn',$thnProd)
+                            ->where('position','current')
+                            ->get(['no_btg']);
+
+        if($getKy->count() > 0) {
+            return count($getKy);
+        }else{            
+            $getKy = 0;
+            return $getKy;
+        }
+    }
+
+    public static function getVolKayuTpnStokPerThn($hph,$tgl_laporan_d,$tgl_laporan_s,$thnProd,$lok,$jnsKy)
+    {
+
+        $getVol = TrDetailTpn::where('hph', $hph)
+                            ->where('lokasi_tpn',$lok)
+                            // ->where('tgl_input_tpn','<=',$tgl_laporan)
+                            ->whereBetween('tgl_input_tpn', [$tgl_laporan_d, $tgl_laporan_s])
+                            ->where('jns_kayu',$jnsKy)
+                            ->where('thn_produksi_tpn',$thnProd)
+                            ->where('position','current')
+                            ->sum('vol');
+        if($getVol > 0) {
+            $decimals = 2;
+            $expo = pow(10,$decimals);
+            // $number = intval($getVol*$expo)/$expo;
+            $number = number_format($getVol,2, '.', '');
+            return $number;
+        }else{
+            $number = 0;
+            return $number;
+        }
+    }
+
+    public static function getQtyKayuStokPerThn($hph,$tgl_laporan_d,$tgl_laporan_s,$thnProd,$lok,$jnsKy)
+    {
+
+        $getKy = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
+                                ->where('tr_detail_position.hph', $hph)
+                                ->where('tr_detail_position.to_lokasi',$lok)
+                                ->whereBetween('tr_detail_position.tgl_input', [$tgl_laporan_d, $tgl_laporan_s])
+                                ->where('tdti.jns_kayu',$jnsKy)
+                                ->where('tdti.thn_produksi_tpn',$thnProd)
+                                // ->where('tgl_input','<=',$tgl_laporan)
+                                ->where('tr_detail_position.position','current')
+                                ->get(['tr_detail_position.no_btg']);
+
+        if($getKy->count() > 0) {
+            return count($getKy);
+        }else{            
+            $getKy = 0;
+            return $getKy;
+        }
+    }
+
+    public static function getVolKayuStokPerThn($hph,$tgl_laporan_d,$tgl_laporan_s,$thnProd,$lok,$jnsKy)
+    {
+
+        $getVol = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
+                                ->where('tr_detail_position.hph', $hph)
+                                ->where('tr_detail_position.to_lokasi',$lok)
+                                ->whereBetween('tr_detail_position.tgl_input', [$tgl_laporan_d, $tgl_laporan_s])
+                                ->where('tdti.jns_kayu',$jnsKy)
+                                ->where('tdti.thn_produksi_tpn',$thnProd)
+                                // ->where('tgl_input','<=',$tgl_laporan)
+                                ->where('tr_detail_position.position','current')
+                                ->sum('tdti.vol');
+        if($getVol > 0) {
+            $decimals = 2;
+            $expo = pow(10,$decimals);
+            // $number = intval($getVol*$expo)/$expo;
+            $number = number_format($getVol,2, '.', '');
+            return $number;
+        }else{
+            $number = 0;
+            return $number;
+        }
+    }
+
+    // -------------------------------- end report Stok Per Tahun -------------------
+
+    //------------------------Report Stok (Diameter) Per Tahun-------------------------------//
+
+    public function rptStokPerThnDia(Request $request)
+    {
+        $dateNow = Carbon::now();
+        $dtNow = date("Y-m-d", strtotime($dateNow));
+        $data['title'] = 'Stok Kayu(Diameter) Per Tahun';
+        return view('reporting/rptStokPerThnDia', $data,compact('dtNow'));
+    }
+
+    public function rptStokPerThnDia_rpt(Request $request)
+    {           
+        $stDt = date("d-m-Y", strtotime($request->tgl_laporan_d));
+        $etDt = date("d-m-Y", strtotime($request->tgl_laporan_s));
+
+        $getSel = DB::select(DB::raw("SELECT k.nama_kayu as namakayu,
+                                            sum(e.low) as lowQty,
+                                            round(sum(e.lowVol),2) as lowVol,
+                                            sum(e.middle) as middleQty,
+                                            round(sum(e.middleVol),2) as middleVol,
+                                            sum(e.high) as highQty,
+                                            round(sum(e.highVol),2) as highVol,
+                                            sum(e.low)+sum(e.middle)+sum(e.high) as totalQty,
+                                            round(sum(e.lowVol)+sum(e.middleVol)+sum(e.highVol),2) as totalVol
+                                        FROM (SELECT a.jns_kayu,
+                                              CASE WHEN a.kelas = '40-49' THEN 1 ELSE 0 END as low,
+                                              CASE WHEN a.kelas = '40-49' THEN a.vol ELSE 0 END as lowVol,
+                                              CASE WHEN a.kelas = '50-59' THEN 1 ELSE 0 END as middle,
+                                              CASE WHEN a.kelas = '50-59' THEN a.vol ELSE 0 END as middleVol,
+                                              CASE WHEN a.kelas = '60 Up' THEN 1 ELSE 0 END as high,
+                                              CASE WHEN a.kelas = '60 Up' THEN a.vol ELSE 0 END as highVol
+                                              FROM tr_detail_tpn_in a WHERE a.position = 'current' and a.thn_produksi_tpn = '$request->thn_produksi' and a.tgl_input_tpn >= '$request->tgl_laporan_d' and a.tgl_input_tpn <= '$request->tgl_laporan_s'
+                                              UNION ALL
+                                              SELECT tdti.jns_kayu as kode_kayu,
+                                                   CASE WHEN tdti.kelas = '40-49' THEN 1 ELSE 0 END as low,
+                                                       CASE WHEN tdti.kelas = '40-49' THEN tdti.vol ELSE 0 END as lowVol,
+                                                       CASE WHEN tdti.kelas = '50-59' THEN 1 ELSE 0 END as middle,
+                                                       CASE WHEN tdti.kelas = '50-59' THEN tdti.vol ELSE 0 END as middleVol,
+                                                       CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
+                                                       CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
+                                              FROM tr_detail_position tdp
+                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdti.thn_produksi_tpn = '$request->thn_produksi' and tdp.tgl_input >= '$request->tgl_laporan_d' and tdp.tgl_input <= '$request->tgl_laporan_s') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                        GROUP BY k.nama_kayu"));
+
+        $array = json_decode(json_encode($getSel), true);
+        
+        if($request->jnsLap == "xls")
+        {
+            $fileNm = "Stok(Diameter) ".$stDt." sampai ".$etDt.".xlsx";
+            return Excel::download(new UserExport_1_1($request->thn_produksi,$request->tgl_laporan_d,$request->tgl_laporan_s,$array), $fileNm);
+        }else{
+            
+            return redirect()->route('rptStokPerThnDia',[$request->thn_produksi])
+                            ->with('thn_produksi', $request->thn_produksi)
+                            ->with('tgl_laporan_d', $request->tgl_laporan_d)
+                            ->with('tgl_laporan_s', $request->tgl_laporan_s)
+                            ->with('getSel', $array);
+        }
+    }
+
+    // ---------------------------------end Stok (Diameter) Per Tahun ----------------
 
     public static function getQtyKayuTpnPerThn($hph,$tgl_laporan,$lok,$jnsKy,$thnProd)
     {
@@ -5487,7 +5889,6 @@ class UserController extends Controller
 
     public function rptLoglistLoc(Request $request)
     {
-
         $data['title'] = 'Laporan Loglist';
         return view('reporting/rptLoglistLoc', $data);
     }

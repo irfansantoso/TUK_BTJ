@@ -2444,31 +2444,31 @@
         <tr>              
             <td style="border: 1px solid #000000;">Total Kayu {{ $jsnx['thnprod'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['tpnQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['tpnVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['tpnVol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['tpk49Qty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['tpk49Vol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['tpk49Vol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['tpn2Qty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['tpn2Vol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['tpn2Vol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['tpk57Qty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['tpk57Vol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['tpk57Vol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['lsdQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['lsdVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['lsdVol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['lsaQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['lsaVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['lsaVol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['ltQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['ltVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['ltVol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['lkdQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['lkdVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['lkdVol'] }}</td>
             <td style="border: 1px solid #000000;background-color:#f8ec84;">-</td>
             <td style="border: 1px solid #000000;background-color:#f8ec84;">-</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['lkaQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['lkaVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['lkaVol'] }}</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['lhQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['lhVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['lhVol'] }}</td>
             <td style="border: 1px solid #000000;background-color:#f8ec84;">-</td>
             <td style="border: 1px solid #000000;background-color:#f8ec84;">-</td>
             <td style="border: 1px solid #000000;">{{ $jsnx['totalQty'] }}</td>
-            <td style="border: 1px solid #000000;">{{ round($jsnx['totalVol']) }}</td>
+            <td style="border: 1px solid #000000;">{{ $jsnx['totalVol'] }}</td>
         </tr>
         @php
           $sum_tpnQty += $jsnx['tpnQty'];
@@ -2500,32 +2500,32 @@
         <tr>
           <th style="background-color:#C0c1c0;border: 1px solid #000000;">Grand Total</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpnQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_tpnVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpnVol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpk49Qty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_tpk49Vol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpk49Vol }}</th>
 
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpn2Qty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_tpn2Vol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpn2Vol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpk57Qty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_tpk57Vol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_tpk57Vol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lsdQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_lsdVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lsdVol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lsaQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_lsaVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lsaVol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_ltQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_ltVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_ltVol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lkdQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_lkdVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lkdVol }}</th>
           <th style="background-color: #f8ec84;border: 1px solid #000000;">-</th>
           <th style="background-color: #f8ec84;border: 1px solid #000000;">-</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lkaQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_lkaVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lkaVol }}</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lhQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_lhVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_lhVol }}</th>
           <th style="background-color: #f8ec84;border: 1px solid #000000;">-</th>
           <th style="background-color: #f8ec84;border: 1px solid #000000;">-</th>
           <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_totalQty }}</th>
-          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ round($sum_totalVol) }}</th>
+          <th style="background-color: #Dcdedb;border: 1px solid #000000;">{{ $sum_totalVol }}</th>
         </tr>
       </tfoot>
     </table>

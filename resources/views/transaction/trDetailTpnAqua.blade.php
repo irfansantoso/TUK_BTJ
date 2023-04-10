@@ -288,7 +288,20 @@
                     class="btn btn-warning btn-sm edit-form">Edit</a>
                   <a href="#" data-toggle="modal" data-target="#modal-delete" data-id="{{ $gdt->id_detail_tpn_in }}" data-nobtg="{{ $gdt->no_btg }}" class="btn btn-danger btn-sm del-conf-det-tpn">Delete</a>
                 @else
-                  No Access
+                  <a href="#" data-toggle="modal" 
+                    data-target="#modal-editTpnInForUser" 
+                    data-id="{{ $gdt->id_detail_tpn_in }}" 
+                    data-kode="{{ $gdt->no_btg }}"                     
+                    data-pjg="{{ $gdt->pjg }}" 
+                    data-pkl="{{ $gdt->pkl }}" 
+                    data-ujg="{{ $gdt->ujg }}"
+                    data-rt2="{{ $gdt->rt2 }}"
+                    data-cct="{{ $gdt->cct }}"
+                    data-pcct="{{ $gdt->pcct }}"
+                    data-vol="{{ $gdt->vol }}"
+                    data-petak="{{ $gdt->petak }}"
+                    data-kelas="{{ $gdt->kelas }}"
+                    class="btn btn-danger btn-sm edit-form-foruser">Edit Kubikasi</a>
                 @endif
                 </td>
             </tr>
@@ -435,7 +448,7 @@
                         <div class="col-sm-2">
                           <div class="form-group">
                             <label>Vol</label>
-                              <input type="text" class="form-control dt_vol" id="vol-m" name="vol" readonly>
+                              <input type="text" class="form-control dt_vol" id="vol-m" name="vol">
                           </div>
                         </div>            
                         <div class="col-sm-2">
@@ -457,6 +470,95 @@
                                 <option value="YA">TIMBUL</option>
                                 <option value="TIDAK">TENGGELAM</option>
                               </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-danger">Edit</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Khusus user  -->
+    <div class="modal fade" id="modal-editTpnInForUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('trDetailTpnAqua.editforuser') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="id_header_tpn_in" id="id_header_tpn_in" value="{{ $getHeaderTpn->id_header_tpn_in }}">
+                  <input type="hidden" class="form-control nobtgx" id="nobtgx" name="no_btg">
+
+                  <div class="modal-body">
+                    <div class="card-body"> 
+                      
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Pjg</label>                            
+                              <input type="number" step="any" class="form-control dt_pjg" id="pjg-mu" name="pjg">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Pkl</label>                
+                              <input type="number" class="form-control dt_pkl" id="pkl-mu" name="pkl">
+                              <span id="pjg-x"></span>               
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Ujg</label>                
+                              <input type="number" class="form-control dt_ujg" id="ujg-mu" name="ujg">
+                          </div>
+                        </div>            
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Rt2</label>
+                              <input type="text" class="form-control dt_rt2" id="rt2-mu" name="rt2" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">         
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Cct</label>
+                              <input type="number" class="form-control dt_cct" id="cct-mu" name="cct">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Pcct %</label>
+                              <input type="text" class="form-control dt_pcct" id="pcct-mu" name="pcct" readonly>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Vol</label>
+                              <input type="text" class="form-control dt_vol" id="vol-mu" name="vol">
+                          </div>
+                        </div>            
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Petak</label>
+                              <input type="text" class="form-control dt_petak" id="petak-mu" name="petak">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Kelas</label>
+                              <input type="text" class="form-control dt_kelas" id="kelas-mu" name="kelas" readonly>
                           </div>
                         </div>
                       </div>

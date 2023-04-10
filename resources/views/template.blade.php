@@ -451,8 +451,8 @@
               @endauth
             </ul>
           </li>
-          <li class="{{ request()->is('rptStokKayu','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
-            <a href="#" class="{{ request()->is('rptStokKayu','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
+          <li class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+            <a href="#" class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-sticky-note"></i>
               <p>
                 Laporan
@@ -464,6 +464,18 @@
                 <a href="{{ route('rptStokKayu') }}" class="{{ request()->is('rptStokKayu') ? 'nav-link active' : 'nav-link' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stok Kayu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('rptStokPerThn') }}" class="{{ request()->is('rptStokPerThn') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stok Kayu Per Thn</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('rptStokPerThnDia') }}" class="{{ request()->is('rptStokPerThnDia') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stok(Diameter) Per Thn</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -586,22 +598,95 @@
 
 <script src="{{asset('admin/plugins/bootstrap-confirm-delete.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-{{-- <script src="{{asset('admin/dist/js/demo.js')}}"></script> --}}
+{{-- <script src="{{asset('admin/dist/js/demox.js')}}"></script> --}}
 
 <script type="text/javascript">
  
  $(document).ready(function(){
  
   $(".preloader").fadeOut();
- 
- })
+
+
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode = 'index'
+  var intersect = true
+
+  var $salesChart = $('#sales-chart')
+  // eslint-disable-next-line no-unused-vars
+  var salesChart = new Chart($salesChart, {
+    type: 'bar',
+    data: {
+      labels: ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      datasets: [
+        {
+          backgroundColor: '#007bff',
+          borderColor: '#007bff',
+          data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+        },
+        {
+          backgroundColor: '#ced4da',
+          borderColor: '#ced4da',
+          data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        mode: mode,
+        intersect: intersect
+      },
+      hover: {
+        mode: mode,
+        intersect: intersect
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          // display: false,
+          gridLines: {
+            display: true,
+            lineWidth: '4px',
+            color: 'rgba(0, 0, 0, .2)',
+            zeroLineColor: 'transparent'
+          },
+          ticks: $.extend({
+            beginAtZero: true,
+
+            // Include a dollar sign in the ticks
+            callback: function (value) {
+              if (value >= 1000) {
+                value /= 1000
+                value += 'k'
+              }
+
+              return '$' + value
+            }
+          }, ticksStyle)
+        }],
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false
+          },
+          ticks: ticksStyle
+        }]
+      }
+    }
+  })
  
 </script>
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, 
-      "lengthChange": false, 
+      "responsive": true,
+      "lengthChange": false,
       "autoWidth": false,
       "order": [],
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
@@ -1663,6 +1748,31 @@
         $('#dt_timbul').val(dt_timbul).trigger('change');
     });
 
+    $(document).on('click', '.edit-form-foruser', function() {
+        let id = $(this).attr('data-id');
+        let nobtg = $(this).attr('data-kode');
+        let dt_pjg = $(this).attr('data-pjg');
+        let dt_pkl = $(this).attr('data-pkl');
+        let dt_ujg = $(this).attr('data-ujg');
+        let dt_rt2 = $(this).attr('data-rt2');
+        let dt_cct = $(this).attr('data-cct');
+        let dt_pcct = $(this).attr('data-pcct');
+        let dt_vol = $(this).attr('data-vol');
+        let dt_petak = $(this).attr('data-petak');
+        let dt_kelas = $(this).attr('data-kelas');
+        $('#id-tpndetin').val(id);
+        $('.nobtgx').val(nobtg);
+        $('.dt_pjg').val(dt_pjg); //ini pakai class karena ID sudah terpakai
+        $('.dt_pkl').val(dt_pkl);
+        $('.dt_ujg').val(dt_ujg);
+        $('.dt_rt2').val(dt_rt2);
+        $('.dt_cct').val(dt_cct);
+        $('.dt_pcct').val(dt_pcct);
+        $('.dt_vol').val(dt_vol);
+        $('.dt_petak').val(dt_petak);
+        $('.dt_kelas').val(dt_kelas);
+    });
+
     window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
@@ -1689,11 +1799,15 @@
         }else{
           kls = "60 Up";
         }
+
+        // var precision = Math.pow(100, 1);
+        // var pvol3 = Math.ceil(vol3 * precision) / precision;
         
         $("#cct").val(cct);
         $("#rt2").val(rata);
         $("#pcct").val(Math.round(pcct));
         // $("#pcct").val(pcct.toFixed(1));
+        // $("#vol").val(pvol3.toFixed(2));
         $("#vol").val(vol3.toFixed(2));
         $("#kelas").val(kls);
       });
@@ -1739,12 +1853,49 @@
         }else{
           kls = "60 Up";
         }
+
+        // var precision = Math.pow(100, 1);
+        // var pvol3 = Math.ceil(vol3 * precision) / precision;
+
         
         $("#rt2-m").val(rata);
-        $("#pcct-m").val(pcct.toFixed(1));
+        $("#pcct-m").val(Math.round(pcct));
+        // $("#pcct-m").val(pcct.toFixed(1));
         $("#vol-m").val(vol3.toFixed(2));
+        // $("#vol-m").val(pvol3.toFixed(2));
         $("#kelas-m").val(kls);
     }); 
+
+    $("body").on('keyup', "#pjg-mu , #pkl-mu, #ujg-mu, #cct-mu", function() {
+        var pjg = parseFloat($("#pjg-mu").val() || 0);
+        var pkl = parseInt($("#pkl-mu").val() || 0);
+        var ujg = parseInt($("#ujg-mu").val() || 0);
+        var cct = parseInt($("#cct-mu").val() || 0);
+        var rata = parseInt((pkl + ujg) / 2);
+        var pcct = parseFloat(1.273 * cct * cct * 1 / rata / rata * 100);
+        var pcct2 = parseFloat(1.273 * cct * cct * 1 / rata / rata * 100)/100;
+        var pcct3 = pcct2.toFixed(3);
+        var vol3 = (0.7854 * rata * rata * pjg) / 10000 - 0.7854 * rata * rata * pjg / 10000 * pcct3;
+        var kls = "";
+        if (rata<50){
+          kls = "40-49";
+        }else if(rata<60){
+          kls = "50-59";
+        }else{
+          kls = "60 Up";
+        }
+
+        // var precision = Math.pow(100, 1);
+        // var pvol3 = Math.ceil(vol3 * precision) / precision;
+
+        
+        $("#rt2-mu").val(rata);
+        $("#pcct-mu").val(Math.round(pcct));
+        // $("#pcct-m").val(pcct.toFixed(1));
+        $("#vol-mu").val(vol3.toFixed(2));
+        // $("#vol-m").val(pvol3.toFixed(2));
+        $("#kelas-mu").val(kls);
+    });
 
     $(function () {
       $("#no_btg").keyup(function () {

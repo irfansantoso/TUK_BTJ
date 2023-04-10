@@ -90,6 +90,7 @@ Route::post('trHeaderTpnAqua/delete/', [UserController::class, 'trHeaderTpnAquaD
 Route::get('trDetailTpnAqua/{id_header_tpn_in}', [UserController::class, 'trDetailTpnAqua'])->name('trDetailTpnAqua')->middleware('auth');
 Route::post('trDetailTpnAqua', [UserController::class, 'trDetailTpnAqua_add'])->name('trDetailTpnAqua.add')->middleware('auth');
 Route::post('trDetailTpnAqua/edit', [UserController::class, 'trDetailTpnAqua_edit'])->name('trDetailTpnAqua.edit')->middleware('auth');
+Route::post('trDetailTpnAqua/editforuser', [UserController::class, 'trDetailTpnAqua_editforuser'])->name('trDetailTpnAqua.editforuser')->middleware('auth');
 Route::post('trDetailTpnAqua/delete/', [UserController::class, 'trDetailTpnAqua_del'])->name('trDetailTpnAqua.del')->middleware('auth');
 
 Route::get('trHeaderTpnAquaOut',[UserController::class, 'trHeaderTpnAquaOut'])->name('trHeaderTpnAquaOut')->middleware('auth');
@@ -209,6 +210,12 @@ Route::get('trLogListTkg/{no_loglist}', [UserController::class, 'trLogListTkg'])
 // ------------------ Reporting --------------------------------//
 Route::get('rptStokKayu',[UserController::class, 'rptStokKayu'])->name('rptStokKayu')->middleware('auth');
 Route::post('rptStokKayu', [UserController::class, 'rptStokKayu_rpt'])->name('rptStokKayu.rpt')->middleware('auth');
+
+Route::get('rptStokPerThn',[UserController::class, 'rptStokPerThn'])->name('rptStokPerThn')->middleware('auth');
+Route::post('rptStokPerThn', [UserController::class, 'rptStokPerThn_rpt'])->name('rptStokPerThn.rpt')->middleware('auth');
+
+Route::get('rptStokPerThnDia',[UserController::class, 'rptStokPerThnDia'])->name('rptStokPerThnDia')->middleware('auth');
+Route::post('rptStokPerThnDia', [UserController::class, 'rptStokPerThnDia_rpt'])->name('rptStokPerThnDia.rpt')->middleware('auth');
 
 Route::get('rptChainTrack',[UserController::class, 'rptChainTrack'])->name('rptChainTrack')->middleware('auth');
 Route::post('rptChainTrack', [UserController::class, 'rptChainTrack_rpt'])->name('rptChainTrack.rpt')->middleware('auth');

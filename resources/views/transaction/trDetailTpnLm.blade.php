@@ -428,7 +428,7 @@
                         <div class="col-sm-2">
                           <div class="form-group">
                             <label>Vol</label>
-                              <input type="text" class="form-control dt_vol" id="vol-m" name="vol" readonly>
+                              <input type="text" class="form-control dt_vol" id="vol-m" name="vol">
                           </div>
                         </div>            
                         <div class="col-sm-2">
