@@ -77,7 +77,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Tgl Ukur</label>
-                  <input type="text" class="form-control" name="tgl_ukur" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                  <input type="text" class="form-control" name="tgl_ukur" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" value="{{ $getHeaderTpn->tgl_input_tpn }}" data-mask>
               </div>
             </div>
             <div class="col-sm-2">

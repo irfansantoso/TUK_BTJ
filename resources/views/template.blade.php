@@ -275,8 +275,8 @@
           </li>
           
         
-          <li class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*','trHeaderTpnLmOut','trDetailTpnLmOut/*','trHeaderTpnAqua','trDetailTpnAqua/*','trHeaderTpnAquaOut','trDetailTpnAquaOut/*','trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*','trHeaderSangaiDrtOutSangaiAir','trDetailSangaiDrtOutSangaiAir/*','trHeaderSangaiAirOutTanjung','trDetailSangaiAirOutTanjung/*','trHeaderSangaiAirOutHanj','trDetailSangaiAirOutHanj/*','trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*','trHeaderTanjungOutKabuauDrt','trDetailTanjungOutKabuauDrt/*','trHeaderKabuauDrtOutKabuauAir','trDetailKabuauDrtOutKabuauAir/*','trHeaderKabuauAirOutTongkang','trDetailKabuauAirOutTongkang/*','trHeaderKabuauAirOutHanj','trDetailKabuauAirOutHanj/*','trHeaderKabuauDrtOutTongkang','trDetailKabuauDrtOutTongkang/*','trHeaderHanjaOutTongkang','trDetailHanjaOutTongkang/*','trTongkang','trLogListTkg/*','trHistory','periodeOperasional','users') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
-            <a href="#" class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*','trHeaderTpnLmOut','trDetailTpnLmOut/*','trHeaderTpnAqua','trDetailTpnAqua/*','trHeaderTpnAquaOut','trDetailTpnAquaOut/*','trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*','trHeaderSangaiDrtOutSangaiAir','trDetailSangaiDrtOutSangaiAir/*','trHeaderSangaiAirOutTanjung','trDetailSangaiAirOutTanjung/*','trHeaderSangaiAirOutHanj','trDetailSangaiAirOutHanj/*','trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*','trHeaderTanjungOutKabuauDrt','trDetailTanjungOutKabuauDrt/*','trHeaderKabuauDrtOutKabuauAir','trDetailKabuauDrtOutKabuauAir/*','trHeaderKabuauAirOutTongkang','trDetailKabuauAirOutTongkang/*','trHeaderKabuauAirOutHanj','trDetailKabuauAirOutHanj/*','trHeaderKabuauDrtOutTongkang','trDetailKabuauDrtOutTongkang/*','trHeaderHanjaOutTongkang','trDetailHanjaOutTongkang/*','trTongkang','trLogListTkg/*','trHistory','periodeOperasional','users') ? 'nav-link active' : 'nav-link' }}">
+          <li class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*','trHeaderTpnLmOut','trDetailTpnLmOut/*','trHeaderTpnAqua','trDetailTpnAqua/*','trHeaderTpnAquaOut','trDetailTpnAquaOut/*','trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*','trHeaderTpkAquaOutIndustri','trDetailTpkAquaOutIndustri/*','trHeaderSangaiDrtOutSangaiAir','trDetailSangaiDrtOutSangaiAir/*','trHeaderSangaiAirOutTanjung','trDetailSangaiAirOutTanjung/*','trHeaderSangaiAirOutHanj','trDetailSangaiAirOutHanj/*','trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*','trHeaderTanjungOutKabuauDrt','trDetailTanjungOutKabuauDrt/*','trHeaderKabuauDrtOutKabuauAir','trDetailKabuauDrtOutKabuauAir/*','trHeaderKabuauAirOutTongkang','trDetailKabuauAirOutTongkang/*','trHeaderKabuauAirOutHanj','trDetailKabuauAirOutHanj/*','trHeaderKabuauDrtOutTongkang','trDetailKabuauDrtOutTongkang/*','trHeaderHanjaOutTongkang','trDetailHanjaOutTongkang/*','trTongkang','trLogListTkg/*','trHistory','periodeOperasional','users') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+            <a href="#" class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*','trHeaderTpnLmOut','trDetailTpnLmOut/*','trHeaderTpnAqua','trDetailTpnAqua/*','trHeaderTpnAquaOut','trDetailTpnAquaOut/*','trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*','trHeaderTpkAquaOutIndustri','trDetailTpkAquaOutIndustri/*','trHeaderSangaiDrtOutSangaiAir','trDetailSangaiDrtOutSangaiAir/*','trHeaderSangaiAirOutTanjung','trDetailSangaiAirOutTanjung/*','trHeaderSangaiAirOutHanj','trDetailSangaiAirOutHanj/*','trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*','trHeaderTanjungOutKabuauDrt','trDetailTanjungOutKabuauDrt/*','trHeaderKabuauDrtOutKabuauAir','trDetailKabuauDrtOutKabuauAir/*','trHeaderKabuauAirOutTongkang','trDetailKabuauAirOutTongkang/*','trHeaderKabuauAirOutHanj','trDetailKabuauAirOutHanj/*','trHeaderKabuauDrtOutTongkang','trDetailKabuauDrtOutTongkang/*','trHeaderHanjaOutTongkang','trDetailHanjaOutTongkang/*','trTongkang','trLogListTkg/*','trHistory','periodeOperasional','users') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Inputan
@@ -284,36 +284,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*','trHeaderTpnLmOut','trDetailTpnLmOut/*') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>TPN LAMA<i class="fas fa-angle-left right"></i></p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('trHeaderTpnLm') }}" class="{{ request()->is('trHeaderTpnLm','trDetailTpnLm/*') ? 'nav-link active' : 'nav-link' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>IN - TPN LAMA </p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('trHeaderTpnLmOut') }}" class="{{ request()->is('trHeaderTpnLmOut','trDetailTpnLmOut/*') ? 'nav-link active' : 'nav-link' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>OUT - TPK 49</p>
-                    </a>
-                  </li>                  
-                </ul>
-              </li>
+              
               <li class="{{ request()->is('trHeaderTpnAqua','trDetailTpnAqua/*','trHeaderTpnAquaOut','trDetailTpnAquaOut/*') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>TPN MANTOBAR<i class="fas fa-angle-left right"></i></p>
+                  <p>TPN <i class="fas fa-angle-left right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{ route('trHeaderTpnAqua') }}" class="{{ request()->is('trHeaderTpnAqua','trDetailTpnAqua/*') ? 'nav-link active' : 'nav-link' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>IN - MANTOBAR</p>    
+                      <p>IN </p>    
                     </a>
                   </li>
                   <li class="nav-item">
@@ -325,24 +306,25 @@
                 </ul>
               </li>
               
-              <li class="{{ request()->is('trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+              <li class="{{ request()->is('trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*','trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*','trHeaderTpkAquaOutIndustri','trDetailTpkAquaOutIndustri/*') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>TPK<i class="fas fa-angle-left right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('trHeaderTpk49OutLSD') }}" class="{{ request()->is('trHeaderTpk49OutLSD','trDetailTpk49OutLSD/*') ? 'nav-link active' : 'nav-link' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>TPK 49 ke LSD</p>
-                    </a>
-                  </li>     
+    
                   <li class="nav-item">
                     <a href="{{ route('trHeaderTpkAquaOutLSD') }}" class="{{ request()->is('trHeaderTpkAquaOutLSD','trDetailTpkAquaOutLSD/*') ? 'nav-link active' : 'nav-link' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>TPK 57 ke LSD</p>
                     </a>
-                  </li>                       
+                  </li>        
+                  <li class="nav-item">
+                    <a href="{{ route('trHeaderTpkAquaOutIndustri') }}" class="{{ request()->is('trHeaderTpkAquaOutIndustri','trDetailTpkAquaOutIndustri/*') ? 'nav-link active' : 'nav-link' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>TPK 57 ke INDUSTRI TB</p>
+                    </a>
+                  </li>               
                 </ul>
               </li>
               <li class="{{ request()->is('trHeaderSangaiDrtOutSangaiAir','trDetailSangaiDrtOutSangaiAir/*','trHeaderSangaiAirOutTanjung','trDetailSangaiAirOutTanjung/*','trHeaderSangaiAirOutHanj','trDetailSangaiAirOutHanj/*','trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*','trHeaderTanjungOutKabuauDrt','trDetailTanjungOutKabuauDrt/*','trHeaderKabuauDrtOutKabuauAir','trDetailKabuauDrtOutKabuauAir/*','trHeaderKabuauAirOutTongkang','trDetailKabuauAirOutTongkang/*','trHeaderKabuauAirOutHanj','trDetailKabuauAirOutHanj/*','trHeaderKabuauDrtOutTongkang','trDetailKabuauDrtOutTongkang/*','trHeaderHanjaOutTongkang','trDetailHanjaOutTongkang/*','trTongkang','trLogListTkg/*') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
@@ -360,7 +342,7 @@
                   <li class="nav-item">
                     <a href="{{ route('trHeaderSangaiDrtOutTanjung') }}" class="{{ request()->is('trHeaderSangaiDrtOutTanjung','trDetailSangaiDrtOutTanjung/*') ? 'nav-link active' : 'nav-link' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>LSD ke Tanjung</p>
+                      <p>LSD ke Tanjung SKY</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -440,19 +422,13 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="admin/index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
+              </li>              
               @endif
               @endauth
             </ul>
           </li>
-          <li class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
-            <a href="#" class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptRekapHauling','rptRekapTkg','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
+          <li class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+            <a href="#" class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-sticky-note"></i>
               <p>
                 Laporan
@@ -497,6 +473,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('rptStokLocDet') }}" class="{{ request()->is('rptStokLocDet') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stok Lokasi Detail</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('rptRekapHauling') }}" class="{{ request()->is('rptRekapHauling') ? 'nav-link active' : 'nav-link' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Hauling</p>
@@ -506,6 +488,12 @@
                 <a href="{{ route('rptRekapTkg') }}" class="{{ request()->is('rptRekapTkg') ? 'nav-link active' : 'nav-link' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Tongkang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('rptRekapPerlokPertahun') }}" class="{{ request()->is('rptRekapPerlokPertahun') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rekap Perlokasi Pertahun</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -597,91 +585,508 @@
 <script src="{{asset('admin/dist/js/adminlte.min.js')}}"></script>
 
 <script src="{{asset('admin/plugins/bootstrap-confirm-delete.js')}}"></script>
+<script src="{{asset('admin/plugins/chartJs/chart.js')}}"></script>
+<script src="{{asset('admin/plugins/chartJs/chartjs-plugin-datalabels.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{asset('admin/dist/js/demox.js')}}"></script> --}}
 
 <script type="text/javascript">
- 
- $(document).ready(function(){
- 
-  $(".preloader").fadeOut();
+
+  var labels = @json($dataLogg['labels'] ?? []);
+  var dataValues = @json($dataLogg['dataValues'] ?? []);
+  var totalVolumes = @json($dataLogg['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
 
 
-  var ticksStyle = {
-    fontColor: '#495057',
-    fontStyle: 'bold'
-  }
+  var labelsWithVolumes = labels.map((label, index) => label + ' (' + totalVolumes[index] + ')');
 
-  var mode = 'index'
-  var intersect = true
+  const data = {
+    labels: labelsWithVolumes,
+    datasets: [{
+      label: 'TPN Mantobar',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
 
-  var $salesChart = $('#sales-chart')
-  // eslint-disable-next-line no-unused-vars
-  var salesChart = new Chart($salesChart, {
+  const config = {
     type: 'bar',
-    data: {
-      labels: ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-      datasets: [
-        {
-          backgroundColor: '#007bff',
-          borderColor: '#007bff',
-          data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
-        },
-        {
-          backgroundColor: '#ced4da',
-          borderColor: '#ced4da',
-          data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
-        }
-      ]
-    },
+    data: data,
     options: {
-      maintainAspectRatio: false,
-      tooltips: {
-        mode: mode,
-        intersect: intersect
-      },
-      hover: {
-        mode: mode,
-        intersect: intersect
-      },
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          // display: false,
-          gridLines: {
-            display: true,
-            lineWidth: '4px',
-            color: 'rgba(0, 0, 0, .2)',
-            zeroLineColor: 'transparent'
-          },
-          ticks: $.extend({
-            beginAtZero: true,
-
-            // Include a dollar sign in the ticks
-            callback: function (value) {
-              if (value >= 1000) {
-                value /= 1000
-                value += 'k'
-              }
-
-              return '$' + value
-            }
-          }, ticksStyle)
-        }],
-        xAxes: [{
-          display: true,
-          gridLines: {
-            display: false
-          },
-          ticks: ticksStyle
-        }]
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
       }
-    }
-  })
- 
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+  
 </script>
+
+<script type="text/javascript">
+
+  var labels2 = @json($dataLogg2['labels'] ?? []);
+  var dataValues2 = @json($dataLogg2['dataValues'] ?? []);
+  var totalVolumes2 = @json($dataLogg2['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes2 = labels2.map((label, index) => label + ' (' + totalVolumes2[index] + ')');
+
+  const data2 = {
+    labels: labelsWithVolumes2,
+    datasets: [{
+      label: 'TPK 57',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues2,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config2 = {
+    type: 'bar',
+    data: data2,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart2 = new Chart(
+    document.getElementById('myChart2'),
+    config2
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels3 = @json($dataLogg3['labels'] ?? []);
+  var dataValues3 = @json($dataLogg3['dataValues'] ?? []);
+  var totalVolumes3 = @json($dataLogg3['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes3 = labels3.map((label, index) => label + ' (' + totalVolumes3[index] + ')');
+
+  const data3 = {
+    labels: labelsWithVolumes3,
+    datasets: [{
+      label: 'LOGPOND SANGAI DARAT',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues3,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config3 = {
+    type: 'bar',
+    data: data3,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart3 = new Chart(
+    document.getElementById('myChart3'),
+    config3
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels4 = @json($dataLogg4['labels'] ?? []);
+  var dataValues4 = @json($dataLogg4['dataValues'] ?? []);
+  var totalVolumes4 = @json($dataLogg4['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes4 = labels4.map((label, index) => label + ' (' + totalVolumes4[index] + ')');
+
+  const data4 = {
+    labels: labelsWithVolumes4,
+    datasets: [{
+      label: 'LOGPOND SANGAI AIR',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues4,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config4 = {
+    type: 'bar',
+    data: data4,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart4 = new Chart(
+    document.getElementById('myChart4'),
+    config4
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels5 = @json($dataLogg5['labels'] ?? []);
+  var dataValues5 = @json($dataLogg5['dataValues'] ?? []);
+  var totalVolumes5 = @json($dataLogg5['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes5 = labels5.map((label, index) => label + ' (' + totalVolumes5[index] + ')');
+
+  const data5 = {
+    labels: labelsWithVolumes5,
+    datasets: [{
+      label: 'LOGPOND TANJUNG',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues5,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config5 = {
+    type: 'bar',
+    data: data5,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart5 = new Chart(
+    document.getElementById('myChart5'),
+    config5
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels6 = @json($dataLogg6['labels'] ?? []);
+  var dataValues6 = @json($dataLogg6['dataValues'] ?? []);
+  var totalVolumes6 = @json($dataLogg6['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes6 = labels6.map((label, index) => label + ' (' + totalVolumes6[index] + ')');
+
+  const data6 = {
+    labels: labelsWithVolumes6,
+    datasets: [{
+      label: 'LOGPOND KABUAU DARAT',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues6,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config6 = {
+    type: 'bar',
+    data: data6,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart6 = new Chart(
+    document.getElementById('myChart6'),
+    config6
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels7 = @json($dataLogg7['labels'] ?? []);
+  var dataValues7 = @json($dataLogg7['dataValues'] ?? []);
+  var totalVolumes7 = @json($dataLogg7['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes7 = labels7.map((label, index) => label + ' (' + totalVolumes7[index] + ')');
+
+  const data7 = {
+    labels: labelsWithVolumes7,
+    datasets: [{
+      label: 'LOGPOND KABUAU AIR',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues7,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config7 = {
+    type: 'bar',
+    data: data7,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart7 = new Chart(
+    document.getElementById('myChart7'),
+    config7
+  );
+  
+</script>
+
+<script type="text/javascript">
+
+  var labels8 = @json($dataLogg8['labels'] ?? []);
+  var dataValues8 = @json($dataLogg8['dataValues'] ?? []);
+  var totalVolumes8 = @json($dataLogg8['totalVolumes'] ?? []).map(volume => Number(volume).toFixed(2) + ' m³');
+
+  var labelsWithVolumes8 = labels8.map((label, index) => label + ' (' + totalVolumes8[index] + ')');
+
+  const data8 = {
+    labels: labelsWithVolumes8,
+    datasets: [{
+      label: 'LOGPOND HANJALIPAN',
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.2)',
+        'rgba(0, 255, 0, 0.2)',
+        'rgba(0, 0, 255, 0.2)',
+        'rgba(255, 255, 0, 0.2)',
+        'rgba(255, 0, 255, 0.2)',
+        'rgba(0, 255, 255, 0.2)',
+        'rgba(128, 0, 0, 0.2)',
+        'rgba(0, 128, 0, 0.2)',
+        'rgba(0, 0, 128, 0.2)',
+        'rgba(255, 165, 0, 0.2)'],
+      borderColor: [
+        'rgb(255, 0, 0)',
+        'rgb(0, 255, 0)',
+        'rgb(0, 0, 255)',
+        'rgb(255, 255, 0)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 255, 255)',
+        'rgb(128, 0, 0)',
+        'rgb(0, 128, 0)',
+        'rgb(0, 0, 128)',
+        'rgb(255, 165, 0)'],
+      borderWidth: 1,
+      data: dataValues8,
+      datalabels: {
+         anchor: 'end',
+         align: 'end',
+         formatter: (value, context) => value + ' Btg'
+      },
+    }]
+  };
+
+  const config8 = {
+    type: 'bar',
+    data: data8,
+    options: {
+        animation: {
+        delay: (context) => context.dataIndex * 200, // Adjust delay duration as needed
+      }
+    },
+    plugins: [ChartDataLabels],
+  };
+
+  const myChart8 = new Chart(
+    document.getElementById('myChart8'),
+    config8
+  );
+  
+</script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -893,6 +1298,63 @@
         processing: true,
         serverSide: true,
         ajax: '{!! route('trHeaderTpkAquaOutLSD.data') !!}', // memanggil route yang menampilkan data json
+        columns: 
+        [
+            { // mengambil & menampilkan kolom sesuai tabel database
+                data: 'no_tpn_out',
+                name: 'no_tpn_out'
+            },
+            {
+                data: 'tgl_input_tpn_out',
+                name: 'tgl_input_tpn_out'
+            },
+            {
+                data: 'trip',
+                name: 'trip'
+            },
+            {
+                data: 'nama_lokasi',
+                name: 'nama_lokasi'
+            },
+            {
+                data: 'md',
+                name: 'md'
+            },
+            {
+                data: 'mua',
+                name: 'mua'
+            },
+            {
+                data: 'mdb',
+                name: 'mdb'
+            },
+            {
+                data: 'muab',
+                name: 'muab'
+            },
+            {
+                data: 'mda',
+                name: 'mda'
+            },
+            {
+                data: 'muaa',
+                name: 'muaa'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false, 
+                searchable: false
+            }
+        ],
+        
+    });
+
+    $('#trHeaderAquaOutIndustri').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('trHeaderTpkAquaOutIndustri.data') !!}', // memanggil route yang menampilkan data json
         columns: 
         [
             { // mengambil & menampilkan kolom sesuai tabel database
@@ -1173,121 +1635,7 @@
         ],
         
     });
-    
-
-    $('#trHeaderSangaiDrtOutTanjung').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('trHeaderSangaiDrtOutTanjung.data') !!}', // memanggil route yang menampilkan data json
-        columns: 
-        [
-            { // mengambil & menampilkan kolom sesuai tabel database
-                data: 'no_tpn_out',
-                name: 'no_tpn_out'
-            },
-            {
-                data: 'tgl_input_tpn_out',
-                name: 'tgl_input_tpn_out'
-            },
-            {
-                data: 'trip',
-                name: 'trip'
-            },
-            {
-                data: 'nama_lokasi',
-                name: 'nama_lokasi'
-            },
-            {
-                data: 'md',
-                name: 'md'
-            },
-            {
-                data: 'mua',
-                name: 'mua'
-            },
-            {
-                data: 'mdb',
-                name: 'mdb'
-            },
-            {
-                data: 'muab',
-                name: 'muab'
-            },
-            {
-                data: 'mda',
-                name: 'mda'
-            },
-            {
-                data: 'muaa',
-                name: 'muaa'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false, 
-                searchable: false
-            }
-        ],
-        
-    });
-
-    $('#trHeaderTanjungOutKabuauDrt').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('trHeaderTanjungOutKabuauDrt.data') !!}', // memanggil route yang menampilkan data json
-        columns: 
-        [
-            { // mengambil & menampilkan kolom sesuai tabel database
-                data: 'no_tpn_out',
-                name: 'no_tpn_out'
-            },
-            {
-                data: 'tgl_input_tpn_out',
-                name: 'tgl_input_tpn_out'
-            },
-            {
-                data: 'trip',
-                name: 'trip'
-            },
-            {
-                data: 'nama_lokasi',
-                name: 'nama_lokasi'
-            },
-            {
-                data: 'md',
-                name: 'md'
-            },
-            {
-                data: 'mua',
-                name: 'mua'
-            },
-            {
-                data: 'mdb',
-                name: 'mdb'
-            },
-            {
-                data: 'muab',
-                name: 'muab'
-            },
-            {
-                data: 'mda',
-                name: 'mda'
-            },
-            {
-                data: 'muaa',
-                name: 'muaa'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false, 
-                searchable: false
-            }
-        ],
-        
-    });
+            
 
     $('#trHeaderKabuauDrtOutKabuauAir').DataTable({
         responsive: true,
@@ -1474,6 +1822,10 @@
             {
                 data: 'mua',
                 name: 'mua'
+            },
+            {
+                data: 'kt',
+                name: 'kt'
             },            
             {
                 data: 'action',
@@ -1922,6 +2274,6 @@
 
   });
 </script>
-
+@yield('custom-js')
 </body>
 </html>

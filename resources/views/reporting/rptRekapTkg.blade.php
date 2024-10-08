@@ -11,21 +11,39 @@
      @csrf        
     <div class="card-body">          
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <div class="form-group">
             <label>Nama Tongkang</label>
               <select class="form-control select2" name="muatUnit" id="muatUnit" style="width: 100%;">
                 <option value="" selected="selected">-- Tongkang --</option>
-                @foreach ($driver as $drv)
-                  <option value="{{ $drv->kode_driver }}">{{ $drv->nama_driver }}</option>
+                @foreach ($unitAlat as $drv)
+                  <option value="{{ $drv->kode_unit_a }}">{{ $drv->nomor_pintu }}</option>
                 @endforeach
               </select>
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <div class="form-group">
-            <label>Tanggal</label>
-              <input type="text" class="form-control" value="{{ $dtNow }}" name="tgl_laporan" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+            <label>Tgl Periode</label>
+              <input type="text" class="form-control" name="tgl_laporan" id="reservation" required>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="form-group">
+            <label>Th Prod</label><br>
+              <input type="text" class="form-control" name="thn_produksi_start" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy" data-mask required>
+          </div>
+        </div>
+        <div class="">
+          <div class="form-group">
+            <label>&nbsp;</label><br>
+              <label>S/D</label>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="form-group">
+            <label>Th Prod</label><br>
+              <input type="text" class="form-control" name="thn_produksi_end" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy" data-mask required>
           </div>
         </div>
         <div class="col-sm-2">
@@ -53,10 +71,13 @@
   <!-- /.card-header -->
   <div class="card-body" style="height:500px;overflow:auto;">
     @php
-      $tglPeriode = date("d-m-Y", strtotime(session('tgl_laporan')));
+      $tglPerAwal = date("d-m-Y", strtotime(session('strDt')));
+      $tglPerAkh = date("d-m-Y", strtotime(session('eDt')));
     @endphp
-    <h4 style="text-align:center;">REKAP PENERIMAAN TONGKANG {{ session('namaTkg') }}</h4>
-    <h6 style="text-align:center;">PERIODE S/D {{ $tglPeriode }}</h6>
+    <h4 style="text-align:center;">REKAP PENERIMAAN TONGKANG</h4>
+    <h6 style="text-align:center;">TAHUN PRODUKSI : {{ session('thn_prod_s') }} S/D {{ session('thn_prod_e') }}</h6>
+    <h6 style="text-align:center;">PERIODE : {{ $tglPerAwal }} S/D {{ $tglPerAkh }}</h6>
+    <h6 style="text-align:center;">TONGKANG : {{ session('namaTkg') }}</h6>
     <br>
     <table id="" class="table table-bordered">
       <thead>

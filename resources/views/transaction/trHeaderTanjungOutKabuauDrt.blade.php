@@ -8,6 +8,10 @@
       <p class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('success') }}</p>
     @endif
 
+    @if(session('success'))
+      <p class="alert alert-success" style="background-color: blue;"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('success') }}</p>
+    @endif
+
     @if(session('error'))
       <p class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('error') }}</p>
     @endif
@@ -25,7 +29,7 @@
       <!-- form start -->
 
       <form class="form-horizontal" action="{{ route('trHeaderTanjungOutKabuauDrt.add') }}" method="POST">
-         @csrf        
+         @csrf
         <div class="card-body">          
           <div class="row">
             <div class="col-sm-3">
@@ -134,7 +138,8 @@
         <!-- /.card-body -->
         </div>
         <div class="card-footer">
-          <button class="btn btn-success">Simpan</button>
+          <button type="submit" id="addBtn" class="btn btn-success">Simpan</button>
+          <button type="button" id="clear" class="btn btn-warning" style="color: white;">Clear</button>
         </div>
         <!-- /.card-footer -->
       </form>              
@@ -192,4 +197,124 @@
             </div>
         </div>
     </div>
-@endsection
+@stop
+@section('custom-js')
+<script type="text/javascript">
+var table; // Declare table variable in global scope
+$(document).ready(function() {
+  $('#trHeaderTanjungOutKabuauDrt').DataTable({
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      ajax: '{!! route('trHeaderTanjungOutKabuauDrt.data') !!}', // memanggil route yang menampilkan data json
+      columns: 
+      [
+          { // mengambil & menampilkan kolom sesuai tabel database
+              data: 'no_tpn_out',
+              name: 'no_tpn_out'
+          },
+          {
+              data: 'tgl_input_tpn_out',
+              name: 'tgl_input_tpn_out'
+          },
+          {
+              data: 'trip',
+              name: 'trip'
+          },
+          {
+              data: 'nama_lokasi',
+              name: 'nama_lokasi'
+          },
+          {
+              data: 'md',
+              name: 'md'
+          },
+          {
+              data: 'mua',
+              name: 'mua'
+          },
+          {
+              data: 'mdb',
+              name: 'mdb'
+          },
+          {
+              data: 'muab',
+              name: 'muab'
+          },
+          {
+              data: 'mda',
+              name: 'mda'
+          },
+          {
+              data: 'muaa',
+              name: 'muaa'
+          },
+          {
+              data: 'action',
+              name: 'action',
+              orderable: false, 
+              searchable: false
+          }
+      ],
+      
+  });
+
+  $('#trHeaderTanjungOutKabuauDrt').on('click', '.item-edit', function() {
+      var id = $(this).attr('onclick').match(/\d+/)[0]; // Mendapatkan ID dari tombol edit
+      
+      // Ambil data berdasarkan ID
+      $.ajax({
+          url: 'trHeaderTanjungOutKabuauDrt/' + id + '/edit',
+          method: 'GET',
+          success: function(response) {
+              // Isi form dengan data yang diterima dari response
+              $('#no_tpn_out').val(response.no_tpn_out);
+              $('input[name="tgl_input_tpn_out"]').val(response.tgl_input_tpn_out);
+              $('#trip').val(response.trip);
+              $('#optMuat').val(response.optMuat).trigger('change');
+              $('#muatUnit').val(response.muatUnit).trigger('change');
+              $('#optBongkar').val(response.optBongkar).trigger('change');
+              $('#bongkarUnit').val(response.bongkarUnit).trigger('change');
+              $('#optAngkut').val(response.optAngkut).trigger('change');
+              $('#angkutUnit').val(response.angkutUnit).trigger('change');
+              $('#kode_periode').val(response.kode_periode);
+
+              $('#no_tpn_out').prop('readonly', true);
+              // Ubah action form menjadi update dengan method POST
+              $('form').attr('action', 'trHeaderTanjungOutKabuauDrt/' + id);
+              $('form').append('<input type="hidden" name="_method" value="PUT">');
+              
+              // Ubah label tombol menjadi 'Ubah'
+              $('#addBtn').text('Ubah');
+          }
+      });
+  });  
+
+  // Reset form to its original state
+  $('#clear').on('click', function() {
+      $('form').trigger('reset');
+      $('form').attr('action', '{{ route("trHeaderTanjungOutKabuauDrt.add") }}');
+      $('form select').each(function() {
+        $(this).val($(this).find('option:first').val()).trigger('change');
+      });
+      $('#no_tpn_out').prop('readonly', false);
+      $('input[name="_method"]').remove();
+      $('#addBtn').text('Simpan');
+  });
+
+
+  // Reset form after successful update
+  $('form').on('submit', function() {
+      setTimeout(function() {
+          $('form').trigger('reset');
+          $('form').attr('action', '{{ route("trHeaderTanjungOutKabuauDrt.add") }}');
+          $('input[name="_method"]').remove();
+          $('#addBtn').text('Simpan');
+      }, 1000); // Adjust delay as needed
+  });
+
+});
+
+
+</script>
+@stop

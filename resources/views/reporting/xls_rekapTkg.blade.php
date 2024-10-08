@@ -3,11 +3,14 @@
   <div class="card-body">
     @php
       
-      $tglPeriode = date("d-m-Y", strtotime($tgl_laporan));
+      $tglPerAwal = date("d-m-Y", strtotime($strDt));
+      $tglPerAkh = date("d-m-Y", strtotime($eDt));
 
     @endphp
-    <h4 style="text-align:center;">REKAP PENERIMAAN TONGKANG {{ $nm_tkg }}</h4>
-    <h6 style="text-align:center;">PERIODE S/D {{ $tglPeriode }}</h6>
+    <h4 style="text-align:center;">REKAP PENERIMAAN TONGKANG</h4>
+    <h6 style="text-align:center;">TAHUN PRODUKSI : {{ $thn_prod_s }} S/D {{ $thn_prod_e }}</h6>
+    <h6 style="text-align:center;">PERIODE : {{ $tglPerAwal }} S/D {{ $tglPerAkh }}</h6>
+    <h6 style="text-align:center;">TONGKANG : {{ $nm_tkg }}</h6>
     <br>
     <table id="" class="table table-bordered">
       <thead>

@@ -1,6 +1,5 @@
 @extends('template')
 @section('content')
-<!-- Content Header (Page header) -->
 
     <!-- Default box -->
     <br>
@@ -24,11 +23,10 @@
       <!-- /.card-header -->
       <!-- form start -->
 
-      <form class="form-horizontal" action="{{ route('trDetailKabuauDrtOutTongkang.add') }}" method="POST">
+      <form class="form-horizontal" action="{{ route('trDetailTpkAquaOutIndustri.add') }}" method="POST">
          @csrf
         <input type="hidden" name="id_header_tpn_out" id="id_header_tpn_out" value="{{ $getHeaderTpnOut[0]['id_header_tpn_out'] }}">
         <input type="hidden" name="no_tpn_out" id="no_tpn_out" value="{{ $getHeaderTpnOut[0]['no_tpn_out'] }}">
-        <input type="hidden" name="no_loglist" id="no_loglist" value="{{ $getHeaderTpnOut[0]['no_loglist'] }}">
         <input type="hidden" name="tgl_input_tpn_out" id="tgl_input_tpn_out" value="{{ $getHeaderTpnOut[0]['tgl_input_tpn_out'] }}">
         <input type="hidden" name="lokasi_tpk" id="lokasi_tpk" value="{{ $getHeaderTpnOut[0]['lokasi_tpn'] }}">
         <input type="hidden" name="lokasi_tujuan" id="lokasi_tujuan" value="{{ $getHeaderTpnOut[0]['tujuan'] }}">
@@ -36,7 +34,7 @@
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group">
-                <label>No LKD :</label><br>
+                <label>No TPK :</label><br>
                   {{ $getHeaderTpnOut[0]['no_tpn_out'] }}
               </div>
             </div>
@@ -68,22 +66,40 @@
           <div class="row">
             <div class="col-sm-2">
               <div class="form-group">
-                <label>Kapal Tongkang :</label><br/>
-                  {{ $getHeaderTpnOut[0]['muakt'] }}
+                <label>Opt Muat :</label><br/>
+                  {{ $getHeaderTpnOut[0]['md'] }}
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                <label>Unit :</label><br/>                
+                  {{ $getHeaderTpnOut[0]['mua'] }}
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label>Nama Operator :</label><br/>                
-                  {{ $getHeaderTpnOut[0]['md'] }}
+                <label>Opt Bongkar :</label><br/>                
+                  {{ $getHeaderTpnOut[0]['mdb'] }}
               </div>
-            </div>   
-            <div class="col-sm-2">
+            </div>            
+            <div class="col-sm-1">
               <div class="form-group">
-                <label>Nama Unit :</label><br/>                
-                  {{ $getHeaderTpnOut[0]['mua'] }}
+                <label>Unit :</label><br/>
+                  {{ $getHeaderTpnOut[0]['muab'] }}
               </div>
-            </div>               
+            </div>    
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>Opt Angkut :</label><br/>
+                  {{ $getHeaderTpnOut[0]['mda'] }}
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-group">
+                <label>Unit :</label><br/>
+                  {{ $getHeaderTpnOut[0]['muaa'] }}
+              </div>
+            </div>        
           </div>
           <hr>
           <div class="row">
@@ -119,13 +135,13 @@
             <tr>
               <th>Thn Prod</th>
               <th>No Btg</th>
-              <th>Thn RKT</th>
+              <th>Thn RKT</th>            
               <th>Petak</th>
               <th>Jns Kayu</th>
               <th>Pjg</th>
               <th>Pkl</th>
               <th>Ujg</th>
-              <th>Rt2</th>
+              <th>Rt2</th>              
               <th>Cct</th>
               <th>Pcct</th>
               <th>Vol</th>
@@ -149,7 +165,7 @@
                 <td>{{ $gdp->vol }}</td>   
                 <td>
                 @if(Auth::user()->level == "administrator")
-                  <a href="#" data-toggle="modal" data-target="#modal-delete" data-id="{{ $gdp->id_detail_position }}" data-nobtg="{{ $gdp->no_btg }}" data-fromlok="{{ $gdp->from_lokasi }}" data-tolok="{{ $gdp->to_lokasi }}" class="btn btn-danger btn-sm del-conf-det-tpn">Delete</a>
+                  <a href="#" data-toggle="modal" data-target="#modal-delete" data-id="{{ $gdp->id_detail_position }}" data-nobtg="{{ $gdp->no_btg }}" class="btn btn-danger btn-sm del-conf-det-tpn">Delete</a>
                 @else
                   No Access
                 @endif
@@ -174,14 +190,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('trDetailKabuauDrtOutTongkang.del') }}" method="post">
+                <form action="{{ route('trDetailTpkAquaOutIndustri.del') }}" method="post">
                   {{ csrf_field() }}
                   <div class="modal-body">
                       Apakah Anda yakin akan menghapus No-Btg 
                       <span id="id-destroy2"></span> ?
                       <input type='hidden' name='nobtg_del' id='id-destroy'>
-                      <input type='hidden' name='fromlok_del' id='from-lok'>
-                      <input type='hidden' name='tolok_del' id='to-lok'>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>

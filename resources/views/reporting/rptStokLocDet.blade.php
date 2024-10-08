@@ -7,7 +7,7 @@
   <!-- /.card-header -->
   <!-- form start -->
 
-  <form class="form-horizontal" action="{{ route('rptLoglistLoc.rpt') }}" method="POST">
+  <form class="form-horizontal" action="{{ route('rptStokLocDet.rpt') }}" method="POST">
      @csrf        
     <div class="card-body">          
       <div class="row">
@@ -27,16 +27,15 @@
                 <option value="730">LP KABUAU DRT</option>
                 <option value="731">LP KABUAU AIR</option>
                 <option value="740">LP HANJALIPAN</option>
-                <option value="800">TONGKANG</option>
               </select>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <div class="form-group">
             <label>Tanggal</label>
-              <input type="text" class="form-control" name="tgl_laporan" id="reservation">
+              <input type="text" class="form-control" value="{{ $dtNow }}" name="tgl_laporan" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
           </div>
-        </div>            
+        </div>
         <div class="col-sm-2">
           <div class="form-group">
             <label>Jenis Laporan</label><br>
@@ -57,11 +56,11 @@
 </div>
   <!-- /.card -->
 
-@if(Session::get('getSel') != "")
+@if(session('lokasi') != "")
 <div class="card">
   <!-- /.card-header -->
   <div class="card-body" style="height:500px;overflow:auto;">
-    <h4 style="text-align:center;">LOGLIST DI LOKASI {{ session('lokasi'); }}</h4>
+    <h4 style="text-align:center;">STOK DI LOKASI {{ session('lokasi'); }}</h4>
     <table id="rptLogLoc" class="table table-bordered table-striped">
       <thead>
         <tr style="border-color: #000000;">
@@ -119,6 +118,7 @@
   <!-- /.card-body -->
 </div>
 <!-- /.card -->
+
 @else
   <div style="text-align:center;">No Data Found</div>
 @endif

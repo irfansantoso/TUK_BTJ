@@ -111,6 +111,15 @@ Route::get('trDetailTpkAquaOutLSD/{id_header_tpn_out}', [UserController::class, 
 Route::post('trDetailTpkAquaOutLSD', [UserController::class, 'trDetailTpkAquaOutLSD_add'])->name('trDetailTpkAquaOutLSD.add')->middleware('auth');
 Route::post('trDetailTpkAquaOutLSD/delete/', [UserController::class, 'trDetailTpkAquaOutLSD_del'])->name('trDetailTpkAquaOutLSD.del')->middleware('auth');
 
+Route::get('trHeaderTpkAquaOutIndustri',[UserController::class, 'trHeaderTpkAquaOutIndustri'])->name('trHeaderTpkAquaOutIndustri')->middleware('auth');
+Route::get('trHeaderTpkAquaOutIndustri/json', [UserController::class, 'trHeaderTpkAquaOutIndustri_data'])->name('trHeaderTpkAquaOutIndustri.data')->middleware('auth');
+Route::post('trHeaderTpkAquaOutIndustri', [UserController::class, 'trHeaderTpkAquaOutIndustri_add'])->name('trHeaderTpkAquaOutIndustri.add')->middleware('auth');
+Route::post('trHeaderTpkAquaOutIndustri/delete/', [UserController::class, 'trHeaderTpkAquaOutIndustriDestroy_del'])->name('trHeaderTpkAquaOutIndustriDestroy.del')->middleware('auth');
+
+Route::get('trDetailTpkAquaOutIndustri/{id_header_tpn_out}', [UserController::class, 'trDetailTpkAquaOutIndustri'])->name('trDetailTpkAquaOutIndustri')->middleware('auth');
+Route::post('trDetailTpkAquaOutIndustri', [UserController::class, 'trDetailTpkAquaOutIndustri_add'])->name('trDetailTpkAquaOutIndustri.add')->middleware('auth');
+Route::post('trDetailTpkAquaOutIndustri/delete/', [UserController::class, 'trDetailTpkAquaOutIndustri_del'])->name('trDetailTpkAquaOutIndustri.del')->middleware('auth');
+
 Route::get('trHeaderSangaiDrtOutSangaiAir',[UserController::class, 'trHeaderSangaiDrtOutSangaiAir'])->name('trHeaderSangaiDrtOutSangaiAir')->middleware('auth');
 Route::get('trHeaderSangaiDrtOutSangaiAir/json', [UserController::class, 'trHeaderSangaiDrtOutSangaiAir_data'])->name('trHeaderSangaiDrtOutSangaiAir.data')->middleware('auth');
 Route::post('trHeaderSangaiDrtOutSangaiAir', [UserController::class, 'trHeaderSangaiDrtOutSangaiAir_add'])->name('trHeaderSangaiDrtOutSangaiAir.add')->middleware('auth');
@@ -142,6 +151,10 @@ Route::get('trHeaderSangaiDrtOutTanjung',[UserController::class, 'trHeaderSangai
 Route::get('trHeaderSangaiDrtOutTanjung/json', [UserController::class, 'trHeaderSangaiDrtOutTanjung_data'])->name('trHeaderSangaiDrtOutTanjung.data')->middleware('auth');
 Route::post('trHeaderSangaiDrtOutTanjung', [UserController::class, 'trHeaderSangaiDrtOutTanjung_add'])->name('trHeaderSangaiDrtOutTanjung.add')->middleware('auth');
 Route::post('trHeaderSangaiDrtOutTanjung/delete/', [UserController::class, 'trHeaderSangaiDrtOutTanjungDestroy_del'])->name('trHeaderSangaiDrtOutTanjungDestroy.del')->middleware('auth');
+Route::get('trHeaderSangaiDrtOutTanjung/{id}/edit', [UserController::class, 'trHeaderSangaiDrtOutTanjung_edit'])->name('trHeaderSangaiDrtOutTanjung.edit')->middleware('auth');
+Route::put('trHeaderSangaiDrtOutTanjung/{id}', [UserController::class, 'trHeaderSangaiDrtOutTanjung_update'])->name('trHeaderSangaiDrtOutTanjung.update')
+    ->middleware('auth');
+
 
 Route::get('trDetailSangaiDrtOutTanjung/{id_header_tpn_out}', [UserController::class, 'trDetailSangaiDrtOutTanjung'])->name('trDetailSangaiDrtOutTanjung')->middleware('auth');
 Route::post('trDetailSangaiDrtOutTanjung', [UserController::class, 'trDetailSangaiDrtOutTanjung_add'])->name('trDetailSangaiDrtOutTanjung.add')->middleware('auth');
@@ -151,6 +164,9 @@ Route::get('trHeaderTanjungOutKabuauDrt',[UserController::class, 'trHeaderTanjun
 Route::get('trHeaderTanjungOutKabuauDrt/json', [UserController::class, 'trHeaderTanjungOutKabuauDrt_data'])->name('trHeaderTanjungOutKabuauDrt.data')->middleware('auth');
 Route::post('trHeaderTanjungOutKabuauDrt', [UserController::class, 'trHeaderTanjungOutKabuauDrt_add'])->name('trHeaderTanjungOutKabuauDrt.add')->middleware('auth');
 Route::post('trHeaderTanjungOutKabuauDrt/delete/', [UserController::class, 'trHeaderTanjungOutKabuauDrtDestroy_del'])->name('trHeaderTanjungOutKabuauDrtDestroy.del')->middleware('auth');
+Route::get('trHeaderTanjungOutKabuauDrt/{id}/edit', [UserController::class, 'trHeaderTanjungOutKabuauDrt_edit'])->name('trHeaderTanjungOutKabuauDrt.edit')->middleware('auth');
+Route::put('trHeaderTanjungOutKabuauDrt/{id}', [UserController::class, 'trHeaderTanjungOutKabuauDrt_update'])->name('trHeaderTanjungOutKabuauDrt.update')
+    ->middleware('auth');
 
 Route::get('trDetailTanjungOutKabuauDrt/{id_header_tpn_out}', [UserController::class, 'trDetailTanjungOutKabuauDrt'])->name('trDetailTanjungOutKabuauDrt')->middleware('auth');
 Route::post('trDetailTanjungOutKabuauDrt', [UserController::class, 'trDetailTanjungOutKabuauDrt_add'])->name('trDetailTanjungOutKabuauDrt.add')->middleware('auth');
@@ -226,11 +242,17 @@ Route::post('rptLoglistLoc', [UserController::class, 'rptLoglistLoc_rpt'])->name
 Route::get('rptStokLoc',[UserController::class, 'rptStokLoc'])->name('rptStokLoc')->middleware('auth');
 Route::post('rptStokLoc', [UserController::class, 'rptStokLoc_rpt'])->name('rptStokLoc.rpt')->middleware('auth');
 
+Route::get('rptStokLocDet',[UserController::class, 'rptStokLocDet'])->name('rptStokLocDet')->middleware('auth');
+Route::post('rptStokLocDet', [UserController::class, 'rptStokLocDet_rpt'])->name('rptStokLocDet.rpt')->middleware('auth');
+
 Route::get('rptRekapHauling',[UserController::class, 'rptRekapHauling'])->name('rptRekapHauling')->middleware('auth');
 Route::post('rptRekapHauling', [UserController::class, 'rptRekapHauling_rpt'])->name('rptRekapHauling.rpt')->middleware('auth');
 
 Route::get('rptRekapTkg',[UserController::class, 'rptRekapTkg'])->name('rptRekapTkg')->middleware('auth');
 Route::post('rptRekapTkg', [UserController::class, 'rptRekapTkg_rpt'])->name('rptRekapTkg.rpt')->middleware('auth');
+
+Route::get('rptRekapPerlokPertahun',[UserController::class, 'rptRekapPerlokPertahun'])->name('rptRekapPerlokPertahun')->middleware('auth');
+Route::post('rptRekapPerlokPertahun', [UserController::class, 'rptRekapPerlokPertahun_rpt'])->name('rptRekapPerlokPertahun.rpt')->middleware('auth');
 
 Route::get('rptStokAkhGab',[UserController::class, 'rptStokAkhGab'])->name('rptStokAkhGab')->middleware('auth');
 Route::post('rptStokAkhGab', [UserController::class, 'rptStokAkhGab_rpt'])->name('rptStokAkhGab.rpt')->middleware('auth');

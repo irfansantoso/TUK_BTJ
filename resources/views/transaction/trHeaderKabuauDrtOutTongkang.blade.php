@@ -65,22 +65,33 @@
           <div class="row">            
             <div class="col-sm-2">
               <div class="form-group">
-                <label>Nama Kapal</label>
-                  <select class="form-control select2" name="optMuat" id="optMuat" style="width: 100%;">
-                    <option value="" selected="selected">-- Kapal --</option>
-                    @foreach ($driver as $drv)
-                      <option value="{{ $drv->kode_driver }}">{{ $drv->nama_driver }}</option>
+                <label>Kapal Tongkang</label>
+                  <select class="form-control select2" name="kapalTongkang" id="kapalTongkang" style="width: 100%;">
+                    <option value="" selected="selected">-- Tongkang --</option>
+                    @foreach ($unitAlat as $una)
+                      <option value="{{ $una->kode_unit_a }}">{{ $una->nomor_pintu }}</option>
                     @endforeach
                   </select>
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label>Nama Tongkang</label>
+                <label>Opt Muat</label>
+                  <select class="form-control select2" name="optMuat" id="optMuat" style="width: 100%;">
+                    <option value="" selected="selected">-- Operator --</option>
+                    @foreach ($driverMuat as $drvMuat)
+                      <option value="{{ $drvMuat->kode_driver }}">{{ $drvMuat->nama_driver }}</option>
+                    @endforeach
+                  </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>Unit</label>
                   <select class="form-control select2" name="muatUnit" id="muatUnit" style="width: 100%;">
-                    <option value="" selected="selected">-- Tongkang --</option>
-                    @foreach ($unitAlat as $una)
-                      <option value="{{ $una->kode_unit_a }}">{{ $una->nomor_pintu }}</option>
+                    <option value="" selected="selected">-- Unit --</option>
+                    @foreach ($unitAlatMuat as $ualm)
+                      <option value="{{ $ualm->kode_unit_a }}">{{ $ualm->nomor_pintu }}</option>
                     @endforeach
                   </select>
               </div>
@@ -115,7 +126,8 @@
             <th>Tanggal</th>
             <th>Trip</th>
             <th>Tujuan</th>
-            <th>Nm Kapal</th>
+            <th>Operator</th>
+            <th>Unit</th>
             <th>Nm Tongkang</th>
             <th>Action</th>
           </tr>

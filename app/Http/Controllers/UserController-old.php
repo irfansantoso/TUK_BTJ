@@ -24,11 +24,9 @@ use App\Exports\UserExport_1_1;
 use App\Exports\UserExport_2;
 use App\Exports\UserExport_3;
 use App\Exports\UserExport_4;
-use App\Exports\UserExport_4_detail;
 use App\Exports\UserExport_5;
 use App\Exports\UserExport_6;
 use App\Exports\UserExport_7;
-use App\Exports\UserExport_8;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +35,6 @@ use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Helpers\Helper;
 use Carbon\Carbon;
 use Session;
 
@@ -71,20 +68,10 @@ class UserController extends Controller
     }
 
     public function home()
-    {        
-
+    {
         if (Auth::check()) {
-
-            $dataLogg = \Helper::dataLogg('002');
-            $dataLogg2 = \Helper::dataLogg2('601');
-            $dataLogg3 = \Helper::dataLogg2('710');
-            $dataLogg4 = \Helper::dataLogg2('711');
-            $dataLogg5 = \Helper::dataLogg2('720');
-            $dataLogg6 = \Helper::dataLogg2('730');
-            $dataLogg7 = \Helper::dataLogg2('731');
-            $dataLogg8 = \Helper::dataLogg2('740');
             $data['title'] = 'Home';
-            return view('home', $data, compact('dataLogg','dataLogg2','dataLogg3','dataLogg4','dataLogg5','dataLogg6','dataLogg7','dataLogg8'));
+            return view('home', $data);
         }else{
             return redirect('login');
         }
@@ -1177,12 +1164,7 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderTpnAqua->save();
-            $getIdHead = DB::table('tr_header_tpn_in')
-                        ->select('*')->where('no_tpn',$request->no_tpn)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailTpnAqua',$jdIdHead[0]['id_header_tpn_in'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderTpnAqua')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderTpnAqua')->with('success', 'Tambah data sukses!');
         }        
     }
 
@@ -1478,12 +1460,7 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderTpnAquaOut->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailTpnAquaOut',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderTpnAquaOut')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderTpnAquaOut')->with('success', 'Tambah data sukses!');
         }        
     }
 
@@ -1629,14 +1606,14 @@ class UserController extends Controller
         {
 
             TrDetailPosition::where('no_btg', $request->nobtg_del)
-                            ->where('to_lokasi', '601')
+                            ->where('to_lokasi', '600')
                             ->delete();
 
             TrDetailTpn::where('no_btg', $request->nobtg_del)
                           ->update(['position' => 'current']);
 
             TrHistory::where('no_btg', $request->nobtg_del)
-                    ->where('lokasi_tpn', '601')
+                    ->where('lokasi_tpn', '600')
                     ->delete();
             DB::commit();
 
@@ -2028,12 +2005,7 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderTpkAquaOutLSD->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailTpkAquaOutLSD',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderTpkAquaOutLSD')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderTpkAquaOutLSD')->with('success', 'Tambah data sukses!');
         }        
     }
 
@@ -2191,285 +2163,6 @@ class UserController extends Controller
 
             TrHistory::where('no_btg', $request->nobtg_del)
                     ->where('lokasi_tpn', '710')
-                    ->delete();
-            DB::commit();
-
-            return back()->with('success',' Data deleted successfully');
-
-        }catch(\Exception $e){
-            DB::rollback();
-            return back()->with('error',' There is some problem, please try again or call your admin!');
-        }
-    }
-
-    // =================== TPK AQUA OUT INDUSTRI TUMBANG BATU ======================================= //
-    
-
-    public function trHeaderTpkAquaOutIndustri(Request $request)
-    {
-
-        $driver = Driver::where('kode_driver','>=',001)
-                        ->where('kode_driver','<=',050)
-                        ->get();
-        $driverAng = Driver::where('kode_driver','>=',201)
-                        ->where('kode_driver','<=',450)
-                        ->get();                        
-        $unitAlat = UnitAlat::where('kode_unit_a','>=',101)
-                            ->where('kode_unit_a','<=',150)
-                            ->get();
-        $unitAlatAng = UnitAlat::where('kode_unit_a','>=',201)
-                            ->get();
-        $data['title'] = 'Header TPK AQUA OUT >> INDUSTRI UD RIZKI - TUMBANG BATU';
-        return view('transaction/trHeaderTpkAquaOutIndustri', $data, compact('driver','driverAng','unitAlat','unitAlatAng'));
-    }
-
-    public function trHeaderTpkAquaOutIndustri_data(Request $request)
-    {
-        $getNPO = DB::table('periode_operasional')
-                        ->select('kode_periode')->where('status_periode','1')
-                        ->get();
-        $jsonx = json_decode($getNPO, true);
-
-        $data = TrHeaderTpnOut::leftJoin('mstr_driver as md', 'md.kode_driver','=','tr_header_tpn_out.optMuat')
-                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')
-                                ->leftJoin('mstr_driver as mdb', 'mdb.kode_driver','=','tr_header_tpn_out.optBongkar')
-                                ->leftJoin('mstr_unit_alat as muab', 'muab.kode_unit_a', '=', 'tr_header_tpn_out.bongkarUnit')
-                                ->leftJoin('mstr_driver as mda', 'mda.kode_driver','=','tr_header_tpn_out.optAngkut')
-                                ->leftJoin('mstr_unit_alat as muaa', 'muaa.kode_unit_a', '=', 'tr_header_tpn_out.angkutUnit')
-                                ->join('mstr_lokasi', 'mstr_lokasi.kode_lokasi', '=', 'tr_header_tpn_out.tujuan')
-                                ->where('tr_header_tpn_out.kode_periode','=',$jsonx[0]['kode_periode'])
-                                ->where('tr_header_tpn_out.lokasi_tpn','=','601')
-                                ->where('tr_header_tpn_out.tujuan','=','650')
-                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','mdb.nama_driver as mdb','muab.nomor_pintu as muab','mda.nama_driver as mda','muaa.nomor_pintu as muaa','mstr_lokasi.nama_lokasi']);
-        return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($data){
-
-                    $btn = '<a href="'. url('trDetailTpkAquaOutIndustri').'/'.$data->id_header_tpn_out.'" class="edit btn btn-primary btn-sm">Detail</a>';
-                    if(Auth::user()->level == "administrator"){
-                    $btn = $btn.'<a href="#" data-toggle="modal" data-target="#modal-delete" data-id="'.$data->id_header_tpn_out.'" data-kode="'.$data->no_tpn_out.'" class="btn btn-danger btn-sm delete-confirm">Delete</a>';
-                    }
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-    }
-
-    public function trHeaderTpkAquaOutIndustri_add(Request $request)
-    {
-        $request->validate([
-            'no_tpn_out' => 'required|unique:tr_header_tpn_out',
-            'tgl_input_tpn_out' => 'required',
-            'trip' => 'required',
-        ]);
-
-        $getNPO = DB::table('periode_operasional')
-                        ->select('*')->where('status_periode','1')
-                        ->get();
-        $jsonx = json_decode($getNPO, true);
-        
-        // Creating timestamp from given date
-        $timestamp1 = strtotime($jsonx[0]['awal_tgl']);
-        $timestamp2 = strtotime($jsonx[0]['akhir_tgl']);
-         
-        // Creating new date format from that timestamp
-        $new_date1 = date("d-m-Y", $timestamp1);
-        $new_date2 = date("d-m-Y", $timestamp2);
-
-        if($request->tgl_input_tpn_out < $jsonx[0]['awal_tgl'] || $request->tgl_input_tpn_out > $jsonx[0]['akhir_tgl'])
-        {
-           return redirect()->route('trHeaderTpkAquaOutIndustri')->with('error', 'Tanggal harus sesuai dengan tahun periode! ('.$new_date1.' to '.$new_date2.')'); 
-        } 
-
-        // exit();
-
-        $trHeaderTpkAquaOutIndustri = new TrHeaderTpnOut([
-            'no_tpn_out' => $request->no_tpn_out,
-            'tgl_input_tpn_out' => $request->tgl_input_tpn_out,
-            'trip' => $request->trip,
-            'lokasi_tpn' => $request->lokasi_tpn,
-            'tujuan' => $request->tujuan,
-            'optMuat' => $request->optMuat,
-            'muatUnit' => $request->muatUnit,
-            'optBongkar' => $request->optBongkar,
-            'bongkarUnit' => $request->bongkarUnit,
-            'optAngkut' => $request->optAngkut,
-            'angkutUnit' => $request->angkutUnit,
-            'kode_periode' => $request->kode_periode,
-            'user_created' => Auth::user()->name,
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        if (Auth::user()->username == null or Auth::user()->username == "") {
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect('/');
-        }else{
-            $trHeaderTpkAquaOutIndustri->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailTpkAquaOutIndustri',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderTpkAquaOutIndustri')->with('success', 'Tambah data sukses!');
-        }        
-    }
-
-    public function trHeaderTpkAquaOutIndustriDestroy_del(Request $request)
-    {
-
-        $getDetTpn =  TrDetailPosition::where('no_tpn_tpk','=',$request->notpn_del)->get();
-        if (!$getDetTpn->isEmpty()) 
-        { 
-            return back()->with('error',' Failed, Hapus data detail terlebih dahulu!');
-        }else{
-            TrHeaderTpnOut::find($request->del_id)->delete();
-            return back()->with('success',' Data deleted successfully');
-        }
-    }
-
-    public function trDetailTpkAquaOutIndustri($id_header_tpn_out)
-    {
-        $getHeaderTpnOut = TrHeaderTpnOut::leftJoin('mstr_driver as md', 'md.kode_driver','=','tr_header_tpn_out.optMuat')
-                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')
-                                ->leftJoin('mstr_driver as mdb', 'mdb.kode_driver','=','tr_header_tpn_out.optBongkar')
-                                ->leftJoin('mstr_unit_alat as muab', 'muab.kode_unit_a', '=', 'tr_header_tpn_out.bongkarUnit')
-                                ->leftJoin('mstr_driver as mda', 'mda.kode_driver','=','tr_header_tpn_out.optAngkut')
-                                ->leftJoin('mstr_unit_alat as muaa', 'muaa.kode_unit_a', '=', 'tr_header_tpn_out.angkutUnit')
-                                ->leftJoin('mstr_lokasi', 'mstr_lokasi.kode_lokasi', '=', 'tr_header_tpn_out.lokasi_tpn')
-                                ->leftJoin('mstr_lokasi as mlo', 'mlo.kode_lokasi', '=', 'tr_header_tpn_out.tujuan')
-                                ->where('tr_header_tpn_out.id_header_tpn_out','=',$id_header_tpn_out)
-                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','mdb.nama_driver as mdb','muab.nomor_pintu as muab','mda.nama_driver as mda','muaa.nomor_pintu as muaa','mstr_lokasi.nama_lokasi','mlo.nama_lokasi as mlo']);
-                                // echo $getHeaderTpnOut[0]['lokasi_tpn'];
-                                // exit();
-        $getLoc =  Lokasi::where('kode_lokasi','=',$getHeaderTpnOut[0]['lokasi_tpn'])->get();
-        
-        $getNoBtg = TrDetailPosition::where('to_lokasi','=',$getHeaderTpnOut[0]['lokasi_tpn'])
-                                    ->where('position','=','current')
-                                    ->get(['no_btg']);
-        $kayu =  Kayu::all();
-        $getDetPos =  TrDetailPosition::leftJoin('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
-                                    ->leftJoin('mstr_kayu as mk', 'mk.kode_kayu', '=', 'tdti.jns_kayu')
-                                    ->where('tr_detail_position.id_header','=',$id_header_tpn_out)
-                                    ->where('tr_detail_position.position','=',"current")
-                                    ->get(['tr_detail_position.*', 
-                                        'tdti.thn_produksi_tpn as thn_prod', 
-                                        'tdti.thn_rkt as thn_rkt',
-                                        'tdti.petak as petak',
-                                        'mk.nama_kayu as nm_kayu',
-                                        'tdti.pjg as pjg',
-                                        'tdti.pkl as pkl',
-                                        'tdti.ujg as ujg',
-                                        'tdti.rt2 as rt2',
-                                        'tdti.cct as cct',
-                                        'tdti.pcct as pcct',
-                                        'tdti.vol as vol',
-                                    ]);
-        
-        $data['title'] = 'Detail TPK AQUA OUT >> INDUSTRI UD RIZKI - TUMBANG BATU';
-        return view('transaction/trDetailTpkAquaOutIndustri', $data, compact('getHeaderTpnOut','getLoc','getNoBtg','kayu','getDetPos'));
-        
-    }
-
-    public function trDetailTpkAquaOutIndustri_add(Request $request)
-    {    
-        if($request->no_btg == ""){
-            return redirect()->route('trDetailTpkAquaOutIndustri',[$request->id_header_tpn_out])->with('error', 'Failed, Nomor Btg harus dipilih!');
-        }else{
-
-            DB::beginTransaction();
-            try
-            {
-                $cekNoBtg =  TrDetailPosition::where('no_btg','=',$request->no_btg)
-                                            ->where('from_lokasi','=', $request->lokasi_tpk)
-                                            ->where('to_lokasi','=', $request->lokasi_tujuan)
-                                            ->where('position','=',"current",)
-                                            ->get();
-                if ($cekNoBtg->isEmpty()) 
-                {
-                    TrDetailPosition::where('no_btg', $request->no_btg)
-                                  ->where('to_lokasi', $request->lokasi_tpk)
-                                  ->update(['position' => "passed"]);
-
-                    $getIdHph = TrDetailTpn::where('no_btg', $request->no_btg)
-                                    ->get(); 
-
-                    $trDetailTpkAquaOutIndustri = new TrDetailPosition([
-                        'id_header' => $request->id_header_tpn_out,
-                        'id_detail_tpn_in' => $getIdHph[0]['id_detail_tpn_in'],
-                        'no_tpn_tpk' => $request->no_tpn_out,
-                        'hph' => $getIdHph[0]['hph'],
-                        'tgl_input' => $request->tgl_input_tpn_out,
-                        'from_lokasi' => $request->lokasi_tpk,
-                        'to_lokasi' => $request->lokasi_tujuan,
-                        'no_btg' => $request->no_btg,
-                        'position' => "current",
-                        'user_created' => Auth::user()->name,
-                        'createdAt' => date('Y-m-d H:i:s'),
-                    ]);
-
-                    $trHistory = new TrHistory([
-                        'no_tpn' => $request->no_tpn_out,
-                        'hph' => $getIdHph[0]['hph'],
-                        'tgl_input_tpn' => $request->tgl_input_tpn_out,
-                        'lokasi_tpn' => $request->lokasi_tujuan,
-                        'no_btg' => $request->no_btg,
-                        'position' => "IN",
-                        'createdAt' => date('Y-m-d H:i:s'),
-                    ]);
-
-                    if (Auth::user()->username == null or Auth::user()->username == "") {
-                        Auth::logout();
-                        $request->session()->invalidate();
-                        $request->session()->regenerateToken();
-                        return redirect('/');
-                    }else{
-                        $trDetailTpkAquaOutIndustri->save();
-                        $trHistory->save();
-                        //-----------query delete duplicate table------------
-                        $Del = DB::delete("DELETE FROM tr_detail_position WHERE id_detail_position IN (SELECT no_akhir FROM (SELECT n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi, MAX(n.id_detail_position) as no_akhir 
-                            FROM tr_detail_position as n 
-                            WHERE n.position='current'
-                            GROUP BY n.no_tpn_tpk, n.no_btg, n.from_lokasi, n.to_lokasi 
-                            HAVING COUNT(*) > 1) x)
-                            ");
-                        $DelHist = DB::delete("DELETE FROM tr_history WHERE id_history IN (SELECT no_akhir FROM (SELECT n.no_tpn, n.lokasi_tpn, n.no_btg, MAX(n.id_history) as no_akhir 
-                            FROM tr_history as n 
-                            WHERE n.position='IN'
-                            GROUP BY n.no_tpn, n.lokasi_tpn, n.no_btg 
-                            HAVING COUNT(*) > 1) x)
-                            "); 
-                        //------------------------------------------------------ 
-                        DB::commit();
-                        return redirect()->route('trDetailTpkAquaOutIndustri',[$request->id_header_tpn_out])->with('success', 'Tambah data sukses!');
-                    }
-                }else{
-                    return redirect()->route('trDetailTpkAquaOutIndustri',[$request->id_header_tpn_out])->with('error', 'Duplicate entry, please back to menu and check Nomor Batang!');
-                }
-            }catch(\Exception $e){
-                DB::rollback();
-                return redirect()->route('trDetailTpkAquaOutIndustri',[$request->id_header_tpn_out])->with('error', 'There is some problem, please try again or call your admin!');
-            }
-        }
-    }
-
-    public function trDetailTpkAquaOutIndustri_del(Request $request)
-    {
-        DB::beginTransaction();
-        try
-        {
-
-            TrDetailPosition::where('no_btg', $request->nobtg_del)
-                            ->where('to_lokasi', '650')
-                            ->delete();
-
-            TrDetailPosition::where('no_btg', $request->nobtg_del)
-                          ->where('to_lokasi', '601')
-                          ->update(['position' => 'current']);
-
-            TrHistory::where('no_btg', $request->nobtg_del)
-                    ->where('lokasi_tpn', '650')
                     ->delete();
             DB::commit();
 
@@ -3354,7 +3047,6 @@ class UserController extends Controller
                     $btn = '<a href="'. url('trDetailSangaiDrtOutTanjung').'/'.$data->id_header_tpn_out.'" class="edit btn btn-primary btn-sm">Detail</a>';
 
                     if(Auth::user()->level == "administrator"){
-                    $btn = $btn.'<a href="javascript:;" onclick="editRecord(${'.$data->id_header_tpn_out.'})" class="edit btn btn-warning btn-sm item-edit" style="color: white;">Edit</a>';
                     $btn = $btn.'<a href="#" data-toggle="modal" data-target="#modal-delete" data-id="'.$data->id_header_tpn_out.'" data-kode="'.$data->no_tpn_out.'" class="btn btn-danger btn-sm delete-confirm">Delete</a>';
                     }
                     return $btn;
@@ -3413,27 +3105,8 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderSangaiDrtOutTanjung->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailSangaiDrtOutTanjung',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderSangaiDrtOutTanjung')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderSangaiDrtOutTanjung')->with('success', 'Tambah data sukses!');
         }        
-    }
-
-    public function trHeaderSangaiDrtOutTanjung_edit($id)
-    {
-        $data = TrHeaderTpnOut::findOrFail($id);
-        return response()->json($data);
-    }
-
-    public function trHeaderSangaiDrtOutTanjung_update(Request $request, $id)
-    {
-        $data = TrHeaderTpnOut::findOrFail($id);
-        $data->update($request->all());
-
-        return redirect()->route('trHeaderSangaiDrtOutTanjung')->with('success', 'Data berhasil diubah');
     }
 
     public function trHeaderSangaiDrtOutTanjungDestroy_del(Request $request)
@@ -3650,7 +3323,6 @@ class UserController extends Controller
                     $btn = '<a href="'. url('trDetailTanjungOutKabuauDrt').'/'.$data->id_header_tpn_out.'" class="edit btn btn-primary btn-sm">Detail</a>';
 
                     if(Auth::user()->level == "administrator"){
-                    $btn = $btn.'<a href="javascript:;" onclick="editRecord(${'.$data->id_header_tpn_out.'})" class="edit btn btn-warning btn-sm item-edit" style="color: white;">Edit</a>';
                     $btn = $btn.'<a href="#" data-toggle="modal" data-target="#modal-delete" data-id="'.$data->id_header_tpn_out.'" data-kode="'.$data->no_tpn_out.'" class="btn btn-danger btn-sm delete-confirm">Delete</a>';
                     }
                     return $btn;
@@ -3709,28 +3381,8 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderTanjungOutKabuauDrt->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            // echo $jdIdHead[0]['id_header_tpn_out']; exit();
-            return redirect()->route('trDetailTanjungOutKabuauDrt',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderTanjungOutKabuauDrt')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderTanjungOutKabuauDrt')->with('success', 'Tambah data sukses!');
         }        
-    }
-
-    public function trHeaderTanjungOutKabuauDrt_edit($id)
-    {
-        $data = TrHeaderTpnOut::findOrFail($id);
-        return response()->json($data);
-    }
-
-    public function trHeaderTanjungOutKabuauDrt_update(Request $request, $id)
-    {
-        $data = TrHeaderTpnOut::findOrFail($id);
-        $data->update($request->all());
-
-        return redirect()->route('trHeaderTanjungOutKabuauDrt')->with('success', 'Data berhasil diubah');
     }
 
     public function trHeaderTanjungOutKabuauDrtDestroy_del(Request $request)
@@ -4709,16 +4361,10 @@ class UserController extends Controller
     {
 
         $driver =  Driver::where('kode_driver','>=',500)->get();
-        $driverMuat = Driver::where('kode_driver','>=',001)
-                        ->where('kode_driver','<=',050)
-                        ->get();
         $tongkang =  Tongkang::all();
         $unitAlat = UnitAlat::where('kode_unit_a','>=',500)->get();
-        $unitAlatMuat = UnitAlat::where('kode_unit_a','>=',101)
-                            ->where('kode_unit_a','<=',150)
-                            ->get();
         $data['title'] = 'Header Kabuau Drt >> Tongkang';
-        return view('transaction/trHeaderKabuauDrtOutTongkang', $data, compact('driver','driverMuat','tongkang','unitAlat','unitAlatMuat'));
+        return view('transaction/trHeaderKabuauDrtOutTongkang', $data, compact('driver','tongkang','unitAlat'));
     }
 
     public function trHeaderKabuauDrtOutTongkang_data(Request $request)
@@ -4729,13 +4375,12 @@ class UserController extends Controller
         $jsonx = json_decode($getNPO, true);
 
         $data = TrHeaderTpnOut::leftJoin('mstr_driver as md', 'md.kode_driver','=','tr_header_tpn_out.optMuat')
-                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')
-                                ->leftJoin('mstr_unit_alat as kt', 'kt.kode_unit_a', '=', 'tr_header_tpn_out.kapalTongkang')                                
+                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')                                
                                 ->leftJoin('mstr_lokasi', 'mstr_lokasi.kode_lokasi', '=', 'tr_header_tpn_out.tujuan')
                                 ->where('tr_header_tpn_out.kode_periode','=',$jsonx[0]['kode_periode'])
                                 ->where('tr_header_tpn_out.lokasi_tpn','=','730')
                                 ->where('tr_header_tpn_out.tujuan','=','800')
-                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','kt.nomor_pintu as kt','mstr_lokasi.nama_lokasi']);
+                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','mstr_lokasi.nama_lokasi']);
         return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
@@ -4758,8 +4403,6 @@ class UserController extends Controller
             'tgl_input_tpn_out' => 'required',
             'trip' => 'required',
         ]);
-
-        // echo $request->kapalTongkang; exit();
 
         $getNPO = DB::table('periode_operasional')
                         ->select('*')->where('status_periode','1')
@@ -4788,7 +4431,6 @@ class UserController extends Controller
             'tujuan' => $request->tujuan,
             'optMuat' => $request->optMuat,
             'muatUnit' => $request->muatUnit,
-            'kapalTongkang' => $request->kapalTongkang,
             'kode_periode' => $request->kode_periode,
             'user_created' => Auth::user()->name,
             'created_at' => date('Y-m-d H:i:s'),
@@ -4801,12 +4443,7 @@ class UserController extends Controller
             return redirect('/');
         }else{
             $trHeaderKabuauDrtOutTongkang->save();
-            $getIdHead = DB::table('tr_header_tpn_out')
-                        ->select('*')->where('no_tpn_out',$request->no_tpn_out)
-                        ->get();
-            $jdIdHead = json_decode($getIdHead, true);
-            return redirect()->route('trDetailKabuauDrtOutTongkang',$jdIdHead[0]['id_header_tpn_out'])->with('success', 'Tambah data Header sukses!');
-            // return redirect()->route('trHeaderKabuauDrtOutTongkang')->with('success', 'Tambah data sukses!');
+            return redirect()->route('trHeaderKabuauDrtOutTongkang')->with('success', 'Tambah data sukses!');
         }        
     }
 
@@ -4826,12 +4463,11 @@ class UserController extends Controller
     public function trDetailKabuauDrtOutTongkang($id_header_tpn_out)
     {
         $getHeaderTpnOut = TrHeaderTpnOut::leftJoin('mstr_driver as md', 'md.kode_driver','=','tr_header_tpn_out.optMuat')
-                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')
-                                ->leftJoin('mstr_unit_alat as muakt', 'muakt.kode_unit_a', '=', 'tr_header_tpn_out.kapalTongkang')                                
+                                ->leftJoin('mstr_unit_alat as mua', 'mua.kode_unit_a', '=', 'tr_header_tpn_out.muatUnit')                                
                                 ->leftJoin('mstr_lokasi', 'mstr_lokasi.kode_lokasi', '=', 'tr_header_tpn_out.lokasi_tpn')
                                 ->leftJoin('mstr_lokasi as mlo', 'mlo.kode_lokasi', '=', 'tr_header_tpn_out.tujuan')
                                 ->where('tr_header_tpn_out.id_header_tpn_out','=',$id_header_tpn_out)
-                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','mstr_lokasi.nama_lokasi','mlo.nama_lokasi as mlo','muakt.nomor_pintu as muakt']);
+                                ->get(['tr_header_tpn_out.*','md.nama_driver as md','mua.nomor_pintu as mua','mstr_lokasi.nama_lokasi','mlo.nama_lokasi as mlo']);
 
         $getLoc =  Lokasi::where('kode_lokasi','=',$getHeaderTpnOut[0]['lokasi_tpn'])->get();
         
@@ -5336,31 +4972,6 @@ class UserController extends Controller
         }
     }
 
-    public static function getVolKayuAllHome($hph,$loc)
-    {
-        $getVolTpn = TrDetailTpn::where('hph', $hph)
-                            ->where('lokasi_tpn',$loc)
-                            ->where('position','current')
-                            ->sum('vol');
-
-        $getVolNoTpn = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
-                                ->where('tr_detail_position.hph', $hph)
-                                ->where('tr_detail_position.to_lokasi',$loc)
-                                ->where('tr_detail_position.position','current')
-                                ->sum('tdti.vol');
-        $getVolAll = $getVolTpn + $getVolNoTpn;
-        if($getVolAll > 0) {
-            $decimals = 2;
-            $expo = pow(10,$decimals);
-            // $number = intval($getVolAll*$expo)/$expo;
-            $number = number_format($getVolAll,2, '.', '');
-            return $number;
-        }else{
-            $number = 0;
-            return $number;
-        }
-    }
-
     public function rptStokKayu_rpt(Request $request)
     {   
         // $pieces = explode("-", $request->tgl_laporan);
@@ -5380,8 +4991,6 @@ class UserController extends Controller
                                             round(sum(e.tpn2Vol),2) as tpn2Vol,
                                             sum(e.tpk57) as tpk57Qty,
                                             round(sum(e.tpk57Vol),2) as tpk57Vol,
-                                            sum(e.industri) as industriQty,
-                                            round(sum(e.industriVol),2) as industriVol,
                                             sum(e.lsd) as lsdQty,
                                             round(sum(e.lsdVol),2) as lsdVol,
                                             sum(e.lsa) as lsaQty,
@@ -5408,8 +5017,6 @@ class UserController extends Controller
                                               CASE WHEN a.lokasi_tpn = '600' THEN a.vol ELSE 0 END as tpk49Vol,
                                               CASE WHEN a.lokasi_tpn = '601' THEN 1 ELSE 0 END as tpk57,
                                               CASE WHEN a.lokasi_tpn = '601' THEN a.vol ELSE 0 END as tpk57Vol,
-                                              CASE WHEN a.lokasi_tpn = '650' THEN 1 ELSE 0 END as industri,
-                                              CASE WHEN a.lokasi_tpn = '650' THEN a.vol ELSE 0 END as industriVol,
                                               CASE WHEN a.lokasi_tpn = '710' THEN 1 ELSE 0 END as lsd,
                                               CASE WHEN a.lokasi_tpn = '710' THEN a.vol ELSE 0 END as lsdVol,
                                               CASE WHEN a.lokasi_tpn = '711' THEN 1 ELSE 0 END as lsa,
@@ -5435,8 +5042,6 @@ class UserController extends Controller
                                                    CASE WHEN tdp.to_lokasi = '600' THEN tdti.vol ELSE 0 END as tpk49Vol,
                                                    CASE WHEN tdp.to_lokasi = '601' THEN 1 ELSE 0 END as tpk57,
                                                    CASE WHEN tdp.to_lokasi = '601' THEN tdti.vol ELSE 0 END as tpk57Vol,
-                                                   CASE WHEN tdp.to_lokasi = '650' THEN 1 ELSE 0 END as industri,
-                                                   CASE WHEN tdp.to_lokasi = '650' THEN tdti.vol ELSE 0 END as industriVol,
                                                    CASE WHEN tdp.to_lokasi = '710' THEN 1 ELSE 0 END as lsd,
                                                    CASE WHEN tdp.to_lokasi = '710' THEN tdti.vol ELSE 0 END as lsdVol,
                                                    CASE WHEN tdp.to_lokasi = '711' THEN 1 ELSE 0 END as lsa,
@@ -5567,62 +5172,6 @@ class UserController extends Controller
         $getVol = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
                                 ->where('tr_detail_position.hph', $hph)
                                 ->where('tr_detail_position.to_lokasi',$lok)
-                                // ->whereBetween('tr_detail_position.tgl_input', [$stDt, $eDt])
-                                ->where('tdti.jns_kayu',$jnsKy)
-                                ->where('tgl_input','<=',$tgl_laporan)
-                                ->where('tr_detail_position.position','current')
-                                ->sum('tdti.vol');
-        if($getVol > 0) {
-            $decimals = 2;
-            $expo = pow(10,$decimals);
-            // $number = intval($getVol*$expo)/$expo;
-            $number = number_format($getVol,2, '.', '');
-            return $number;
-        }else{
-            $number = 0;
-            return $number;
-        }
-    }
-
-    public static function getQtyKayuTkg($hph,$tgl_laporan,$lokfrom,$lokto,$jnsKy)
-    {
-        // $pieces = explode("-", $tgl_laporan);
-        // $startDt = $pieces[0];
-        // $endDt = $pieces[1];
-        // $stDt = date("Y-m-d", strtotime($startDt));
-        // $eDt = date("Y-m-d", strtotime($endDt));
-        // echo $stDt;
-
-        $getKy = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
-                                ->where('tr_detail_position.hph', $hph)
-                                ->where('tr_detail_position.from_lokasi',$lokfrom)
-                                ->where('tr_detail_position.to_lokasi',$lokto)
-                                // ->whereBetween('tr_detail_position.tgl_input', [$stDt, $eDt])
-                                ->where('tdti.jns_kayu',$jnsKy)
-                                ->where('tgl_input','<=',$tgl_laporan)
-                                ->where('tr_detail_position.position','current')
-                                ->get(['tr_detail_position.no_btg']);
-
-        if($getKy->count() > 0) {
-            return count($getKy);
-        }else{            
-            $getKy = 0;
-            return $getKy;
-        }
-    }
-
-    public static function getVolKayuTkg($hph,$tgl_laporan,$lokfrom,$lokto,$jnsKy)
-    {
-        // $pieces = explode("-", $tgl_laporan);
-        // $startDt = $pieces[0];
-        // $endDt = $pieces[1];
-        // $stDt = date("Y-m-d", strtotime($startDt));
-        // $eDt = date("Y-m-d", strtotime($endDt));
-
-        $getVol = TrDetailPosition::join('tr_detail_tpn_in as tdti', 'tdti.no_btg','=','tr_detail_position.no_btg')
-                                ->where('tr_detail_position.hph', $hph)
-                                ->where('tr_detail_position.from_lokasi',$lokfrom)
-                                ->where('tr_detail_position.to_lokasi',$lokto)
                                 // ->whereBetween('tr_detail_position.tgl_input', [$stDt, $eDt])
                                 ->where('tdti.jns_kayu',$jnsKy)
                                 ->where('tgl_input','<=',$tgl_laporan)
@@ -6174,7 +5723,7 @@ class UserController extends Controller
         }
     }
 
-    //------------------------Report Chainsaw Tracktor---------------------------//
+    //------------------------Report Chainsaw Tracktor---------------------------------------------//
 
     public function rptChainTrack(Request $request)
     {
@@ -6336,7 +5885,7 @@ class UserController extends Controller
         }
     }        
 
-    //------------------------Report Loglist-------------------------------------//
+    //------------------------Report Loglist---------------------------------------------//
 
     public function rptLoglistLoc(Request $request)
     {
@@ -6346,20 +5895,20 @@ class UserController extends Controller
 
     public function rptLoglistLoc_rpt(Request $request)
     {   
-        $pieces = explode("-", $request->tgl_laporan);
-        $startDt = $pieces[0];
-        $endDt = $pieces[1];
-        $strDt = date("Y-m-d", strtotime($startDt));
-        $eDt = date("Y-m-d", strtotime($endDt));
+        // $pieces = explode("-", $request->tgl_laporan);
+        // $startDt = $pieces[0];
+        // $endDt = $pieces[1];
+        // $strDt = date("Y-m-d", strtotime($startDt));
+        // $eDt = date("Y-m-d", strtotime($endDt));
         $dateNow = Carbon::now();
         $stDt = date("d-m-Y", strtotime($dateNow));
 
         $lokasi = $request->lokasi;
         if($lokasi == "001" OR $lokasi == "002")
         {
-            $s_lok = "a.lokasi_tpn = '".$lokasi."' and a.tgl_input_tpn >='".$strDt."' and a.tgl_input_tpn <='".$eDt."'";
+            $s_lok = "a.lokasi_tpn = '".$lokasi."' and a.position = 'current'";
         }else{
-            $s_lok = "b.to_lokasi = '".$lokasi."' and b.tgl_input >='".$strDt."' and b.tgl_input <='".$eDt."'";
+            $s_lok = "b.to_lokasi = '".$lokasi."' and b.position = 'current'";
         }
 
         $getSel = DB::select(DB::raw("SELECT a.*, mk.nama_kayu as mk, mc.nama_chainsaw as mc, mh.nama_helper as mh, md.nama_driver as md FROM tr_detail_tpn_in a
@@ -6387,7 +5936,7 @@ class UserController extends Controller
         }
     }
 
-    //------------------------Report Stok Lokasi---------------------------------//
+    //------------------------Report Stok Lokasi---------------------------------------------//
 
     public function rptStokLoc(Request $request)
     {
@@ -6462,61 +6011,7 @@ class UserController extends Controller
         }
     }
 
-    //------------------------Report Stok Lokasi Detail---------------------------------//
-
-    public function rptStokLocDet(Request $request)
-    {
-        $dateNow = Carbon::now();
-        $dtNow = date("Y-m-d", strtotime($dateNow));
-        $data['title'] = 'Stok Per Lokasi Detail';
-        return view('reporting/rptStokLocDet', $data,compact('dtNow'));
-    }
-
-    public function rptStokLocDet_rpt(Request $request)
-    {   
-        // $pieces = explode("-", $request->tgl_laporan);
-        // $startDt = $pieces[0];
-        // $endDt = $pieces[1];
-        // $strDt = date("Y-m-d", strtotime($startDt));
-        $eDt = date("Y-m-d", strtotime($request->tgl_laporan));
-        $dateNow = Carbon::now();
-        $stDt = date("d-m-Y", strtotime($dateNow));
-
-        $lokasi = $request->lokasi;
-        if($lokasi == "001" OR $lokasi == "002")
-        {
-            $s_lok = "a.position = 'current' and a.lokasi_tpn = '".$lokasi."' and a.tgl_input_tpn <='".$eDt."'";
-        }else{
-            $s_lok = "b.position = 'current' and b.to_lokasi = '".$lokasi."' and b.tgl_input <='".$eDt."'";
-        }
-
-        $getSel = DB::select(DB::raw("SELECT a.*, mk.nama_kayu as mk, mc.nama_chainsaw as mc, mh.nama_helper as mh, md.nama_driver as md FROM tr_detail_tpn_in a
-                                        LEFT JOIN tr_detail_position b ON b.id_detail_tpn_in = a.id_detail_tpn_in
-                                        LEFT JOIN mstr_kayu as mk ON a.jns_kayu = mk.kode_kayu
-                                        LEFT JOIN mstr_chainsaw as mc ON a.kode_chainsaw = mc.kode_chainsaw 
-                                        LEFT JOIN mstr_helper as mh ON a.kode_helper = mh.kode_helper
-                                        LEFT JOIN mstr_driver as md ON a.kode_driver = md.kode_driver
-                                        WHERE ".$s_lok.";"));        
-
-        $array = json_decode(json_encode($getSel), true);
-
-        $getNmLok = Lokasi::where('kode_lokasi','=',$request->lokasi)
-                            ->get(['nama_lokasi']);
-        
-        if($request->jnsLap == "xls")
-        {
-            $fileNm = "Stok Di Lokasi ".$getNmLok[0]['nama_lokasi']." ".$stDt.".xlsx";
-            return Excel::download(new UserExport_4_detail($getNmLok[0]['nama_lokasi'],$request->tgl_laporan,$array), $fileNm);
-        }else{
-            
-            return redirect()->route('rptStokLocDet',[$request->lokasi])
-                            ->with('lokasi', $getNmLok[0]['nama_lokasi'])
-                            ->with('tgl_laporan', $request->tgl_laporan)
-                            ->with('getSel', $array);
-        }
-    }
-
-    //------------------------Report Rekap Hauling---------------------------------//
+    //------------------------Report Rekap Hauling---------------------------------------------//
 
     public function rptRekapHauling(Request $request)
     {
@@ -6560,7 +6055,7 @@ class UserController extends Controller
                                               CASE WHEN a.kelas = '50-59' THEN a.vol ELSE 0 END as middleVol,
                                               CASE WHEN a.kelas = '60 Up' THEN 1 ELSE 0 END as high,
                                               CASE WHEN a.kelas = '60 Up' THEN a.vol ELSE 0 END as highVol
-                                              FROM tr_detail_tpn_in a WHERE a.lokasi_tpn = '$lokasi' and a.tgl_input_tpn >= '$strDt' and a.tgl_input_tpn <= '$eDt'
+                                              FROM tr_detail_tpn_in a WHERE a.position = 'current' and a.lokasi_tpn = '$lokasi' and a.tgl_input_tpn >= '$strDt' and a.tgl_input_tpn <= '$eDt'
                                               UNION ALL
                                               SELECT tdti.jns_kayu as kode_kayu,
                                                    CASE WHEN tdti.kelas = '40-49' THEN 1 ELSE 0 END as low,
@@ -6570,7 +6065,7 @@ class UserController extends Controller
                                                        CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
                                                        CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
                                               FROM tr_detail_position tdp
-                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.to_lokasi = '$lokasi' and tdp.tgl_input >= '$strDt' and tdp.tgl_input <= '$eDt') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.to_lokasi = '$lokasi' and tdp.tgl_input >= '$strDt' and tdp.tgl_input <= '$eDt') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
                                         GROUP BY k.nama_kayu"));
 
         $array = json_decode(json_encode($getSel), true);
@@ -6591,29 +6086,26 @@ class UserController extends Controller
         }
     }
 
-    //------------------------Report Rekap Tongkang--------------------------------//
+    //------------------------Report Rekap Tongkang---------------------------------------------//
 
     public function rptRekapTkg(Request $request)
     {
         $dateNow = Carbon::now();
         $dtNow = date("Y-m-d", strtotime($dateNow));
-        $unitAlat = UnitAlat::where('kode_unit_a','>=',500)->get();
         $driver =  Driver::where('kode_driver','>=',500)->get();
         $data['title'] = 'Rekap Penerimaan Tongkang';
-        return view('reporting/rptRekapTkg', $data,compact('dtNow','unitAlat'));
+        return view('reporting/rptRekapTkg', $data,compact('dtNow','driver'));
     }
 
     public function rptRekapTkg_rpt(Request $request)
     {   
-        $pieces = explode("-", $request->tgl_laporan);
-        $startDt = $pieces[0];
-        $endDt = $pieces[1];
-        $strDt = date("Y-m-d", strtotime($startDt));
-        $eDt = date("Y-m-d", strtotime($endDt));
+        // $pieces = explode("-", $request->tgl_laporan);
+        // $startDt = $pieces[0];
+        // $endDt = $pieces[1];
+        // $strDt = date("Y-m-d", strtotime($startDt));
+        $eDt = date("Y-m-d", strtotime($request->tgl_laporan));
         $dateNow = Carbon::now();
-        $dtNow = date("d-m-Y", strtotime($dateNow));
-        $thn_prod_s = $request->thn_produksi_start;
-        $thn_prod_e = $request->thn_produksi_end;
+        $stDt = date("d-m-Y", strtotime($dateNow));
 
         $lokasi = $request->lokasi;
 
@@ -6636,175 +6128,29 @@ class UserController extends Controller
                                               FROM tr_detail_position tdp
                                               LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg 
                                               LEFT JOIN tr_header_tpn_out thto ON tdp.id_header = thto.id_header_tpn_out 
-                                              WHERE tdti.thn_produksi_tpn >= '$thn_prod_s' and tdti.thn_produksi_tpn <= '$thn_prod_e' and tdp.position = 'current' and tdp.to_lokasi = '800' and tdp.tgl_input >= '$strDt' and tdp.tgl_input <= '$eDt' and thto.kapalTongkang = '$request->muatUnit') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                              WHERE tdp.position = 'current' and tdp.to_lokasi = '800' and tdp.tgl_input <= '$eDt' and thto.muatUnit = '$request->muatUnit') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
                                         GROUP BY k.nama_kayu"));
 
         $array = json_decode(json_encode($getSel), true);
 
         $getNmTkg = Driver::where('kode_driver','=',$request->muatUnit)
                             ->get(['nama_driver']);
-        $nmDriver = isset($getNmTkg[0]['nama_driver']) ? $getNmTkg[0]['nama_driver'] : null;
         
         if($request->jnsLap == "xls")
         {
-            $fileNm = "Rekap Penerimaan Tongkang (".$nmDriver.") ".$dtNow.".xlsx";
-            return Excel::download(new UserExport_5($nmDriver,$strDt,$eDt,$thn_prod_s,$thn_prod_e,$array), $fileNm);
+            $fileNm = "Rekap Penerimaan Tongkang ".$getNmTkg[0]['nama_driver']." ".$stDt.".xlsx";
+            return Excel::download(new UserExport_5($getNmTkg[0]['nama_driver'],$request->tgl_laporan,$array), $fileNm);
         }else{
             
             return redirect()->route('rptRekapTkg',[])
                             ->with('muatUnit', $request->muatUnit)
-                            ->with('namaTkg', $nmDriver)
-                            ->with('strDt', $strDt)
-                            ->with('eDt', $eDt)
-                            ->with('thn_prod_s', $thn_prod_s)
-                            ->with('thn_prod_e', $thn_prod_e)
-                            ->with('getSel', $array);
-        }
-    }
-
-    //------------------------Report Rekap Perlokasi Pertahun--------------------------//
-
-    public function rptRekapPerlokPertahun(Request $request)
-    {
-        $dateNow = Carbon::now();
-        $dtNow = date("Y-m-d", strtotime($dateNow));
-        $yearNow = date("Y", strtotime($dateNow));
-        $data['title'] = 'Rekap Perlokasi Pertahun';
-        return view('reporting/rptRekapPerlokPertahun', $data,compact('dtNow','yearNow'));
-    }
-
-    public function rptRekapPerlokPertahun_rpt(Request $request)
-    {           
-        $eDt = date("Y-m-d", strtotime($request->tgl_laporan));
-        $dateNow = Carbon::now();
-        $stDt = date("d-m-Y", strtotime($dateNow));
-        $thn_prod = $request->thn_produksi;        
-
-        $lokasi = $request->lokasi;
-
-        $getSel = DB::select(DB::raw("SELECT v.kode_lokasi as kodelok,v.nama_lokasi as nama_lokasi, k.nama_kayu as namakayu,
-                                            sum(e.low) as lowQty,
-                                            round(sum(e.lowVol),2) as lowVol,
-                                            sum(e.middle) as middleQty,
-                                            round(sum(e.middleVol),2) as middleVol,
-                                            sum(e.high) as highQty,
-                                            round(sum(e.highVol),2) as highVol,
-                                            sum(e.low)+sum(e.middle)+sum(e.high) as totalQty,
-                                            round(sum(e.lowVol)+sum(e.middleVol)+sum(e.highVol),2) as totalVol
-                                        FROM (SELECT a.lokasi_tpn as lokasiTpn, a.jns_kayu,
-                                              CASE WHEN a.kelas = '40-49' THEN 1 ELSE 0 END as low,
-                                              CASE WHEN a.kelas = '40-49' THEN a.vol ELSE 0 END as lowVol,
-                                              CASE WHEN a.kelas = '50-59' THEN 1 ELSE 0 END as middle,
-                                              CASE WHEN a.kelas = '50-59' THEN a.vol ELSE 0 END as middleVol,
-                                              CASE WHEN a.kelas = '60 Up' THEN 1 ELSE 0 END as high,
-                                              CASE WHEN a.kelas = '60 Up' THEN a.vol ELSE 0 END as highVol
-                                              FROM tr_detail_tpn_in a WHERE a.position = 'current' and a.thn_produksi_tpn = '$thn_prod' and a.tgl_input_tpn <= '$eDt'
-                                              UNION ALL
-                                              SELECT tdp.to_lokasi as lokasiTpn, tdti.jns_kayu as kode_kayu,
-                                                   CASE WHEN tdti.kelas = '40-49' THEN 1 ELSE 0 END as low,
-                                                       CASE WHEN tdti.kelas = '40-49' THEN tdti.vol ELSE 0 END as lowVol,
-                                                       CASE WHEN tdti.kelas = '50-59' THEN 1 ELSE 0 END as middle,
-                                                       CASE WHEN tdti.kelas = '50-59' THEN tdti.vol ELSE 0 END as middleVol,
-                                                       CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
-                                                       CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
-                                              FROM tr_detail_position tdp
-                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdti.thn_produksi_tpn = '$thn_prod' and tdp.tgl_input <= '$eDt' and tdp.to_lokasi != '650' and tdp.to_lokasi != '800') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
-                                        LEFT JOIN mstr_lokasi v ON e.lokasiTpn = v.kode_lokasi
-                                        GROUP BY v.kode_lokasi,v.nama_lokasi,k.nama_kayu
-                                        ORDER BY v.kode_lokasi ASC"));
-
-        $array = json_decode(json_encode($getSel, JSON_PRETTY_PRINT),true);      
-
-        $getNmLok = Lokasi::where('kode_lokasi','=',$request->lokasi)
-                            ->get(['nama_lokasi']);
-        
-        if($request->jnsLap == "xls")
-        {
-            $fileNm = "Rekap-Perlokasi-Pertahun-".$stDt.".xlsx";
-            return Excel::download(new UserExport_8($request->tgl_laporan,$request->thn_produksi,$array), $fileNm);
-        }else{
-            
-            return redirect()->route('rptRekapPerlokPertahun')
+                            ->with('namaTkg', $getNmTkg[0]['nama_driver'])
                             ->with('tgl_laporan', $request->tgl_laporan)
-                            ->with('thn_produksi', $request->thn_produksi)
                             ->with('getSel', $array);
         }
     }
 
-    public static function rptRekapPerlokPertahun_subTot($lokasi,$eDt,$yDt,$col)
-    {
-
-        $getSelSubTot = DB::select(DB::raw("SELECT v.nama_lokasi as nama_lokasi, v.kode_lokasi as kodelok,
-                                            sum(e.low) as lowQty,
-                                            round(sum(e.lowVol),2) as lowVol,
-                                            sum(e.middle) as middleQty,
-                                            round(sum(e.middleVol),2) as middleVol,
-                                            sum(e.high) as highQty,
-                                            round(sum(e.highVol),2) as highVol,
-                                            sum(e.low)+sum(e.middle)+sum(e.high) as totalQty,
-                                            round(sum(e.lowVol)+sum(e.middleVol)+sum(e.highVol),2) as totalVol
-                                        FROM (SELECT a.lokasi_tpn as lokasiTpn, a.jns_kayu,
-                                              CASE WHEN a.kelas = '40-49' THEN 1 ELSE 0 END as low,
-                                              CASE WHEN a.kelas = '40-49' THEN a.vol ELSE 0 END as lowVol,
-                                              CASE WHEN a.kelas = '50-59' THEN 1 ELSE 0 END as middle,
-                                              CASE WHEN a.kelas = '50-59' THEN a.vol ELSE 0 END as middleVol,
-                                              CASE WHEN a.kelas = '60 Up' THEN 1 ELSE 0 END as high,
-                                              CASE WHEN a.kelas = '60 Up' THEN a.vol ELSE 0 END as highVol
-                                              FROM tr_detail_tpn_in a WHERE a.position = 'current' and a.lokasi_tpn = '$lokasi' and a.thn_produksi_tpn = '$yDt' and a.tgl_input_tpn <= '$eDt'
-                                              UNION ALL
-                                              SELECT tdp.to_lokasi as lokasiTpn, tdti.jns_kayu as kode_kayu,
-                                                   CASE WHEN tdti.kelas = '40-49' THEN 1 ELSE 0 END as low,
-                                                       CASE WHEN tdti.kelas = '40-49' THEN tdti.vol ELSE 0 END as lowVol,
-                                                       CASE WHEN tdti.kelas = '50-59' THEN 1 ELSE 0 END as middle,
-                                                       CASE WHEN tdti.kelas = '50-59' THEN tdti.vol ELSE 0 END as middleVol,
-                                                       CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
-                                                       CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
-                                              FROM tr_detail_position tdp
-                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.to_lokasi = '$lokasi' and tdp.tgl_input <= '$eDt' and tdti.thn_produksi_tpn = '$yDt' and tdp.to_lokasi != '650' and tdp.to_lokasi != '800') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
-                                        LEFT JOIN mstr_lokasi v ON e.lokasiTpn = v.kode_lokasi
-                                        GROUP BY v.nama_lokasi,v.kode_lokasi
-                                        ORDER BY v.kode_lokasi ASC"));    
-
-        $jsonz = json_decode(json_encode($getSelSubTot), true);
-        // print_r($jsonz);
-        // exit();
-        if($col == 'lowQty')
-        {
-            $newNo1 = $jsonz[0]['lowQty'] ?? 0;
-        }elseif($col == 'lowVol')
-        {
-            $newNo1 = $jsonz[0]['lowVol'] ?? 0;
-        }elseif($col == 'middleQty')
-        {
-            $newNo1 = $jsonz[0]['middleQty'] ?? 0;
-        }elseif($col == 'middleVol')
-        {
-            $newNo1 = $jsonz[0]['middleVol'] ?? 0;
-        }elseif($col == 'highQty')
-        {
-            $newNo1 = $jsonz[0]['highQty'] ?? 0;
-        }elseif($col == 'highVol')
-        {
-            $newNo1 = $jsonz[0]['highVol'] ?? 0;
-        }elseif($col == 'totalQty')
-        {
-            $newNo1 = $jsonz[0]['totalQty'] ?? 0;
-        }elseif($col == 'totalVol')
-        {
-            $newNo1 = $jsonz[0]['totalVol'] ?? 0;
-        }
-
-        
-        if($newNo1 > 0) {
-            return $newNo1;
-        }else{            
-            $newNo3 = '0';
-            return $newNo3;
-        }        
-    }
-
-
-    //---------------------Report Stok Akhir Gabungan---------------------------//
+    //------------------------Report Stok Akhir Gabungan-----------------------------------//
 
     public function rptStokAkhGab(Request $request)
     {
@@ -6821,6 +6167,12 @@ class UserController extends Controller
         $stDt = date("d-m-Y", strtotime($dateNow));
 
         $lokasi = $request->lokasi;
+        // if($lokasi == "001" OR $lokasi == "002")
+        // {
+        //     $s_lok = "a.lokasi_tpn = '".$lokasi."' and a.position = 'current'";
+        // }else{
+        //     $s_lok = "b.to_lokasi = '".$lokasi."' and b.position = 'current'";
+        // }
 
         $getSel = DB::select(DB::raw("SELECT v.kode_lokasi as kodelok,v.nama_lokasi as nama_lokasi, k.nama_kayu as namakayu,
                                             sum(e.low) as lowQty,
@@ -6848,7 +6200,7 @@ class UserController extends Controller
                                                        CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
                                                        CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
                                               FROM tr_detail_position tdp
-                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.tgl_input <= '$eDt' and tdp.to_lokasi != '650' and tdp.to_lokasi != '800') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.tgl_input <= '$eDt') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
                                         LEFT JOIN mstr_lokasi v ON e.lokasiTpn = v.kode_lokasi
                                         GROUP BY v.kode_lokasi,v.nama_lokasi,k.nama_kayu
                                         ORDER BY v.kode_lokasi ASC"));
@@ -6902,7 +6254,7 @@ class UserController extends Controller
                                                        CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
                                                        CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
                                               FROM tr_detail_position tdp
-                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.to_lokasi = '$lokasi' and tdp.tgl_input <= '$eDt' and tdp.to_lokasi != '650' and tdp.to_lokasi != '800') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg WHERE tdp.position = 'current' and tdp.to_lokasi = '$lokasi' and tdp.tgl_input <= '$eDt') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
                                         LEFT JOIN mstr_lokasi v ON e.lokasiTpn = v.kode_lokasi
                                         GROUP BY v.nama_lokasi,v.kode_lokasi
                                         ORDER BY v.kode_lokasi ASC"));    

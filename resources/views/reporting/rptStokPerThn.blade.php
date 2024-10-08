@@ -74,8 +74,9 @@
           <th rowspan="2" style="text-align:center;vertical-align: middle;">Jns Log</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 49</th>
-          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN MANTOBAR</th>
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 57</th>
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#f8ec84;">INDUSTRI UD RIZKI</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">SANGAI DRT</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">SANGAI AIR</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TANJUNG</th>
@@ -95,6 +96,8 @@
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
           <th>M3</th>
+          <th style="background-color:#f8ec84;">Btg</th>
+          <th style="background-color:#f8ec84;">M3</th>
           <th style="background-color:#Dcdedb;">Btg</th>
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
@@ -155,6 +158,16 @@
           @endif
           @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0100') != 0)
           <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0100'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100'); }}</td>
           @else
           <td>-</td>
           @endif
@@ -319,6 +332,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101'); }}</td>
+          @else
+          <td>-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0101') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0101'); }}</td>
           @else
@@ -477,6 +500,16 @@
           @endif
           @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0200') != 0)
           <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0200'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200'); }}</td>
           @else
           <td>-</td>
           @endif
@@ -641,6 +674,16 @@
           @else
           <td style="background-color: #f8b775;">-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') != 0)
+          <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300'); }}</td>
+          @else
+          <td style="background-color: #f8b775;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') != 0)
+          <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300'); }}</td>
+          @else
+          <td style="background-color: #f8b775;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0300') != 0)
           <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0300'); }}</td>
           @else
@@ -799,6 +842,16 @@
           @endif
           @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0301') != 0)
           <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0301'); }}</td>
+          @else
+          <td style="background-color: #f8b775;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') != 0)
+          <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301'); }}</td>
+          @else
+          <td style="background-color: #f8b775;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') != 0)
+          <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301'); }}</td>
           @else
           <td style="background-color: #f8b775;">-</td>
           @endif
@@ -963,6 +1016,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400'); }}</td>
+          @else
+          <td>-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0400') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0400'); }}</td>
           @else
@@ -1121,6 +1184,16 @@
           @endif
           @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0500') != 0)
           <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0500'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500'); }}</td>
           @else
           <td>-</td>
           @endif
@@ -1285,6 +1358,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600'); }}</td>
+          @else
+          <td>-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0600') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'710','0600'); }}</td>
           @else
@@ -1443,6 +1526,16 @@
           @endif
           @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0900') != 0)
           <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0900'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900') != 0)
+          <td>{{ App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900') != 0)
+          <td>{{ App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900'); }}</td>
           @else
           <td>-</td>
           @endif
@@ -1748,6 +1841,53 @@
           App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0500') + 
           App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0600') + 
           App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'601','0900'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+
+          @if(App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') +
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900') != 0)
+          <td>
+          {{ 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') +
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') + 
+          App\Http\Controllers\UserController::getQtyKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900'); }}</td>
+          @else
+          <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') +
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900') != 0)
+          <td>
+          {{ 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0100') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0101') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0200') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0300') +
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0301') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0400') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0500') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0600') + 
+          App\Http\Controllers\UserController::getVolKayuStokPerThn(session('hph'),session('tgl_laporan_d'),session('tgl_laporan_s'),session('thn_produksi'),'650','0900'); }}</td>
           @else
           <td>-</td>
           @endif

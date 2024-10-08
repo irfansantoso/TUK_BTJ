@@ -67,7 +67,7 @@
               <div class="form-group">
                 <label>Opt Muat</label>
                   <select class="form-control select2" name="optMuat" id="optMuat" style="width: 100%;">
-                    <option selected="selected">-- Operator --</option>
+                    <option value="" selected="selected">-- Operator --</option>
                     @foreach ($driver as $drv)
                       <option value="{{ $drv->kode_driver }}">{{ $drv->nama_driver }}</option>
                     @endforeach
@@ -78,7 +78,7 @@
               <div class="form-group">
                 <label>Unit</label>
                   <select class="form-control select2" name="muatUnit" id="muatUnit" style="width: 100%;">
-                    <option selected="selected">-- Unit --</option>
+                    <option value="" selected="selected">-- Unit --</option>
                     @foreach ($unitAlat as $ual)
                       <option value="{{ $ual->kode_unit_a }}">{{ $ual->nomor_pintu }}</option>
                     @endforeach
@@ -89,7 +89,7 @@
               <div class="form-group">
                 <label>Opt Bongkar</label>
                   <select class="form-control select2" name="optBongkar" id="optBongkar" style="width: 100%;">
-                    <option selected="selected">-- Operator --</option>
+                    <option value="" selected="selected">-- Operator --</option>
                     @foreach ($driver as $drv)
                       <option value="{{ $drv->kode_driver }}">{{ $drv->nama_driver }}</option>
                     @endforeach
@@ -100,7 +100,7 @@
               <div class="form-group">
                 <label>Unit</label>
                   <select class="form-control select2" name="bongkarUnit" id="bongkarUnit" style="width: 100%;">
-                    <option selected="selected">-- Unit --</option>
+                    <option value="" selected="selected">-- Unit --</option>
                     @foreach ($unitAlat as $ual)
                       <option value="{{ $ual->kode_unit_a }}">{{ $ual->nomor_pintu }}</option>
                     @endforeach
@@ -111,7 +111,7 @@
               <div class="form-group">
                 <label>Opt Angkut</label>
                   <select class="form-control select2" name="optAngkut" id="optAngkut" style="width: 100%;">
-                    <option selected="selected">-- Operator --</option>
+                    <option value="" selected="selected">-- Operator --</option>
                     @foreach ($driverAng as $drv)
                       <option value="{{ $drv->kode_driver }}">{{ $drv->nama_driver }}</option>
                     @endforeach
@@ -122,7 +122,7 @@
               <div class="form-group">
                 <label>Unit</label>
                   <select class="form-control select2" name="angkutUnit" id="angkutUnit" style="width: 100%;">
-                    <option selected="selected">-- Unit --</option>
+                    <option value="" selected="selected">-- Unit --</option>
                     @foreach ($unitAlatAng as $ual)
                       <option value="{{ $ual->kode_unit_a }}">{{ $ual->nomor_pintu }}</option>
                     @endforeach

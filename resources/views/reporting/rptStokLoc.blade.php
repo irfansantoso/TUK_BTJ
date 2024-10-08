@@ -18,15 +18,15 @@
                 <option value="0" selected="selected">-Pilih-</option>
                 <option value="001">TPN LAMA</option>
                 <option value="600">--TPK 49</option>
-                <option value="002">TPN MANTOBAR</option>
+                <option value="002">TPN</option>
                 <option value="601">--TPK 57</option>
+                <option value="650">INDUSTRI UD RIZKI</option>
                 <option value="710">LP SANGAI DRT</option>                    
                 <option value="711">LP SANGAI AIR</option>
                 <option value="720">LP TANJUNG</option>
                 <option value="730">LP KABUAU DRT</option>
                 <option value="731">LP KABUAU AIR</option>
                 <option value="740">LP HANJALIPAN</option>
-                <option value="800">TONGKANG</option>
               </select>
           </div>
         </div>

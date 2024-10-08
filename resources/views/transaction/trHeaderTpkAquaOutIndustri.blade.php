@@ -4,12 +4,8 @@
 
     <!-- Default box -->
     <br>
-    @if(session('info'))
-      <p class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('success') }}</p>
-    @endif
-
     @if(session('success'))
-      <p class="alert alert-success" style="background-color: blue;"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('success') }}</p>
+      <p class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>{{ session('success') }}</p>
     @endif
 
     @if(session('error'))
@@ -28,19 +24,19 @@
       <!-- /.card-header -->
       <!-- form start -->
 
-      <form class="form-horizontal" action="{{ route('trHeaderSangaiDrtOutTanjung.add') }}" method="POST">
+      <form class="form-horizontal" action="{{ route('trHeaderTpkAquaOutIndustri.add') }}" method="POST">
          @csrf        
         <div class="card-body">          
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group">
-                <label>No LSD</label>
-                  <input type="text" class="form-control" id="no_tpn_out" name="no_tpn_out" placeholder="" value="LSD/710/{{ App\Http\Controllers\UserController::getNewNoTpkOut('710'); }}-OUT">
+                <label>No TPK</label>
+                  <input type="text" class="form-control" id="no_tpn_out" name="no_tpn_out" placeholder="" value="TPK/601/{{ App\Http\Controllers\UserController::getNewNoTpkOut('601'); }}-OUT">
               </div>
             </div>
             <div class="col-sm-2">
               <div class="form-group">
-                <label>Tanggal</label>
+                <label>Tanggal</label>                
                   <input type="text" class="form-control" name="tgl_input_tpn_out" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>                
               </div>
             </div>
@@ -53,15 +49,15 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Lokasi</label>                
-                  <input type="text" class="form-control" name="" value="Sangai Drt" disabled>
-                  <input type="hidden" name="lokasi_tpn" id="lokasi_tpn" value="710">                
+                  <input type="text" class="form-control" name="" value="TPK 57" disabled>
+                  <input type="hidden" name="lokasi_tpn" id="lokasi_tpn" value="601">                
               </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label>Tujuan</label>                
-                  <input type="text" class="form-control" name="" value="Tanjung" disabled>
-                  <input type="hidden" name="tujuan" id="tujuan" value="720">                
+                  <input type="text" class="form-control" name="" value="IND. UD RIZKI - TUMBANG BATU" disabled>
+                  <input type="hidden" name="tujuan" id="tujuan" value="650">                
               </div>
             </div>
             <input type="hidden" class="form-control" id="kode_periode" name="kode_periode" value="{{ App\Http\Controllers\UserController::getKodePeriodeOperasional(); }}">             
@@ -88,7 +84,7 @@
                     @endforeach
                   </select>
               </div>
-            </div>
+            </div>            
             <div class="col-sm-2">
               <div class="form-group">
                 <label>Opt Bongkar</label>
@@ -132,14 +128,13 @@
                     @endforeach
                   </select>
               </div>
-            </div>
+            </div> 
             <input type="hidden" class="form-control" id="kode_periode" name="kode_periode" value="{{ App\Http\Controllers\UserController::getKodePeriodeOperasional(); }}">             
           </div>
         <!-- /.card-body -->
         </div>
         <div class="card-footer">
-          <button type="submit" id="addBtn" class="btn btn-success">Simpan</button>
-          <button type="button" id="clear" class="btn btn-warning" style="color: white;">Clear</button>
+          <button class="btn btn-success">Simpan</button>
         </div>
         <!-- /.card-footer -->
       </form>              
@@ -149,10 +144,10 @@
     <div class="card">
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="trHeaderSangaiDrtOutTanjung" class="table table-bordered table-striped">
+        <table id="trHeaderAquaOutIndustri" class="table table-bordered table-striped">
           <thead>
           <tr>
-            <th>No LSD Out</th>
+            <th>No TPN Out</th>
             <th>Tanggal</th>
             <th>Trip</th>
             <th>Tujuan</th>
@@ -161,7 +156,7 @@
             <th>Op.Bongkar</th>
             <th>Unit Bongkar</th>
             <th>Op.Angkut</th>
-            <th>Unit Angkut</th>  
+            <th>Unit Angkut</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -181,7 +176,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('trHeaderSangaiDrtOutTanjungDestroy.del') }}" method="post">
+                <form action="{{ route('trHeaderTpkAquaOutIndustriDestroy.del') }}" method="post">
                   {{ csrf_field() }}
                   <div class="modal-body">
                       Apakah Anda yakin akan menghapus
@@ -197,124 +192,4 @@
             </div>
         </div>
     </div>
-@stop
-@section('custom-js')
-<script type="text/javascript">
-var table; // Declare table variable in global scope
-$(document).ready(function() {
-  table = $('#trHeaderSangaiDrtOutTanjung').DataTable({
-      responsive: true,
-      processing: true,
-      serverSide: true,
-      ajax: '{!! route('trHeaderSangaiDrtOutTanjung.data') !!}', // memanggil route yang menampilkan data json
-      columns: 
-      [
-          { // mengambil & menampilkan kolom sesuai tabel database
-              data: 'no_tpn_out',
-              name: 'no_tpn_out'
-          },
-          {
-              data: 'tgl_input_tpn_out',
-              name: 'tgl_input_tpn_out'
-          },
-          {
-              data: 'trip',
-              name: 'trip'
-          },
-          {
-              data: 'nama_lokasi',
-              name: 'nama_lokasi'
-          },
-          {
-              data: 'md',
-              name: 'md'
-          },
-          {
-              data: 'mua',
-              name: 'mua'
-          },
-          {
-              data: 'mdb',
-              name: 'mdb'
-          },
-          {
-              data: 'muab',
-              name: 'muab'
-          },
-          {
-              data: 'mda',
-              name: 'mda'
-          },
-          {
-              data: 'muaa',
-              name: 'muaa'
-          },
-          {
-              data: 'action',
-              name: 'action',
-              orderable: false, 
-              searchable: false
-          }
-      ],
-      
-  });
-
-  $('#trHeaderSangaiDrtOutTanjung').on('click', '.item-edit', function() {
-      var id = $(this).attr('onclick').match(/\d+/)[0]; // Mendapatkan ID dari tombol edit
-      
-      // Ambil data berdasarkan ID
-      $.ajax({
-          url: 'trHeaderSangaiDrtOutTanjung/' + id + '/edit',
-          method: 'GET',
-          success: function(response) {
-              // Isi form dengan data yang diterima dari response
-              $('#no_tpn_out').val(response.no_tpn_out);
-              $('input[name="tgl_input_tpn_out"]').val(response.tgl_input_tpn_out);
-              $('#trip').val(response.trip);
-              $('#optMuat').val(response.optMuat).trigger('change');
-              $('#muatUnit').val(response.muatUnit).trigger('change');
-              $('#optBongkar').val(response.optBongkar).trigger('change');
-              $('#bongkarUnit').val(response.bongkarUnit).trigger('change');
-              $('#optAngkut').val(response.optAngkut).trigger('change');
-              $('#angkutUnit').val(response.angkutUnit).trigger('change');
-              $('#kode_periode').val(response.kode_periode);
-
-              $('#no_tpn_out').prop('readonly', true);
-              // Ubah action form menjadi update dengan method POST
-              $('form').attr('action', 'trHeaderSangaiDrtOutTanjung/' + id);
-              $('form').append('<input type="hidden" name="_method" value="PUT">');
-              
-              // Ubah label tombol menjadi 'Ubah'
-              $('#addBtn').text('Ubah');
-          }
-      });
-  });  
-
-  // Reset form to its original state
-  $('#clear').on('click', function() {
-      $('form').trigger('reset');
-      $('form').attr('action', '{{ route("trHeaderSangaiDrtOutTanjung.add") }}');
-      $('form select').each(function() {
-        $(this).val($(this).find('option:first').val()).trigger('change');
-      });
-      $('#no_tpn_out').prop('readonly', false);
-      $('input[name="_method"]').remove();
-      $('#addBtn').text('Simpan');
-  });
-
-
-  // Reset form after successful update
-  $('form').on('submit', function() {
-      setTimeout(function() {
-          $('form').trigger('reset');
-          $('form').attr('action', '{{ route("trHeaderSangaiDrtOutTanjung.add") }}');
-          $('input[name="_method"]').remove();
-          $('#addBtn').text('Simpan');
-      }, 1000); // Adjust delay as needed
-  });
-
-});
-
-
-</script>
-@stop
+@endsection

@@ -22,7 +22,7 @@
         <div class="col-sm-2">
           <div class="form-group">
             <label>Tanggal</label>
-              <input type="text" class="form-control" name="tgl_laporan" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+              <input type="text" class="form-control" name="tgl_laporan" data-inputmask-alias="datetime" value="{{ session('tgl_laporan') ?? '' }}" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
           </div>
         </div>
         <div class="col-sm-2">
@@ -57,8 +57,9 @@
           <th rowspan="2" style="text-align:center;vertical-align: middle;">Jns Log</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 49</th>
-          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN MANTOBAR</th>
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 57</th>
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#f8ec84;">INDUSTRI UD RIZKI</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">SANGAI DRT</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">SANGAI AIR</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TANJUNG</th>
@@ -78,6 +79,8 @@
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
           <th>M3</th>
+          <th style="background-color:#f8ec84;">Btg</th>
+          <th style="background-color:#f8ec84;">M3</th>
           <th style="background-color:#Dcdedb;">Btg</th>
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
@@ -140,6 +143,16 @@
           <td>{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0100'); }}</td>
           @else
           <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0100') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0100'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0100') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0100'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
           @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0100') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0100'); }}</td>
@@ -302,6 +315,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0101') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0101'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0101') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0101'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0101') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0101'); }}</td>
           @else
@@ -462,6 +485,16 @@
           <td>{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0200'); }}</td>
           @else
           <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0200') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0200'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0200') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0200'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
           @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0200') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0200'); }}</td>
@@ -624,6 +657,16 @@
           @else
           <td style="background-color: #f8b775;">-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0300') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0300'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0300') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0300'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0300') != 0)
           <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0300'); }}</td>
           @else
@@ -784,6 +827,16 @@
           <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0301'); }}</td>
           @else
           <td style="background-color: #f8b775;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0301') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0301'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0301') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0301'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
           @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0301') != 0)
           <td style="background-color: #f8b775;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0301'); }}</td>
@@ -946,6 +999,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0400') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0400'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0400') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0400'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0400') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0400'); }}</td>
           @else
@@ -1106,6 +1169,16 @@
           <td>{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0500'); }}</td>
           @else
           <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0500') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0500'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0500') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0500'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
           @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0500') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0500'); }}</td>
@@ -1268,6 +1341,16 @@
           @else
           <td>-</td>
           @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0600') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0600'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0600') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0600'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0600') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0600'); }}</td>
           @else
@@ -1428,6 +1511,16 @@
           <td>{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0900'); }}</td>
           @else
           <td>-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0900') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0900'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0900') != 0)
+          <td style="background-color:#f8ec84;">{{ App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0900'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
           @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0900') != 0)
           <td>{{ App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0900'); }}</td>
@@ -1651,7 +1744,7 @@
           App\Http\Controllers\UserController::getQtyKayuTpn(session('hph'),session('tgl_laporan'),'002','0500') + 
           App\Http\Controllers\UserController::getQtyKayuTpn(session('hph'),session('tgl_laporan'),'002','0600') + 
           App\Http\Controllers\UserController::getQtyKayuTpn(session('hph'),session('tgl_laporan'),'002','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayuTpn(session('hph'),session('tgl_laporan'),'002','0100') + 
           App\Http\Controllers\UserController::getQtyKayuTpn(session('hph'),session('tgl_laporan'),'002','0101') + 
@@ -1674,7 +1767,7 @@
           App\Http\Controllers\UserController::getVolKayuTpn(session('hph'),session('tgl_laporan'),'002','0500') + 
           App\Http\Controllers\UserController::getVolKayuTpn(session('hph'),session('tgl_laporan'),'002','0600') + 
           App\Http\Controllers\UserController::getVolKayuTpn(session('hph'),session('tgl_laporan'),'002','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayuTpn(session('hph'),session('tgl_laporan'),'002','0100') + 
           App\Http\Controllers\UserController::getVolKayuTpn(session('hph'),session('tgl_laporan'),'002','0101') + 
@@ -1697,7 +1790,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'601','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'601','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'601','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'601','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'601','0101') + 
@@ -1720,7 +1813,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'601','0101') + 
@@ -1734,6 +1827,53 @@
           @else
           <td>-</td>
           @endif
+
+          @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0100') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0101') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0200') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0300') +
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0301') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0400') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0500') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0600') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0900') != 0)
+          <td style="background-color:#f8ec84;">
+          {{ 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0100') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0101') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0200') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0300') +
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0301') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0400') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0500') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0600') + 
+          App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'650','0900'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
+          @if(App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0100') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0101') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0200') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0300') +
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0301') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0400') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0500') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0600') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0900') != 0)
+          <td style="background-color:#f8ec84;">
+          {{ 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0100') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0101') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0200') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0300') +
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0301') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0400') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0500') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0600') + 
+          App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'650','0900'); }}</td>
+          @else
+          <td style="background-color:#f8ec84;">-</td>
+          @endif
           @if(App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0101') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0200') + 
@@ -1743,7 +1883,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'710','0101') + 
@@ -1766,7 +1906,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'710','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'710','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'710','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'710','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'710','0101') + 
@@ -1789,7 +1929,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'711','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'711','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'711','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'711','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'711','0101') + 
@@ -1812,7 +1952,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'711','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'711','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'711','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'711','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'711','0101') + 
@@ -1835,7 +1975,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'720','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'720','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'720','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'720','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'720','0101') + 
@@ -1858,7 +1998,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'720','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'720','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'720','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'720','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'720','0101') + 
@@ -1881,7 +2021,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'730','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'730','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'730','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'730','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'730','0101') + 
@@ -1904,7 +2044,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'730','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'730','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'730','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'730','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'730','0101') + 
@@ -1932,7 +2072,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'731','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'731','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'731','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'731','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'731','0101') + 
@@ -1955,7 +2095,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'731','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'731','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'731','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'731','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'731','0101') + 
@@ -1978,7 +2118,7 @@
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'740','0500') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'740','0600') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'740','0900') != 0)
-          <td>
+          <td style="background-color:#66e31e;">
           {{ 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'740','0100') + 
           App\Http\Controllers\UserController::getQtyKayu(session('hph'),session('tgl_laporan'),'740','0101') + 
@@ -2001,7 +2141,7 @@
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'740','0500') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'740','0600') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'740','0900') != 0)
-          <td>
+          <td style="background-color:#acf283;">
           {{ 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'740','0100') + 
           App\Http\Controllers\UserController::getVolKayu(session('hph'),session('tgl_laporan'),'740','0101') + 
@@ -2403,8 +2543,9 @@
           <th rowspan="2" style="text-align:center;vertical-align: middle;">Status Kayu</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 49</th>
-          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN MANTOBAR</th>
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TPN</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">TPK 57</th>         
+          <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#f8ec84;">INDUSTRI UD RIZKI</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">SANGAI DRT</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;">SANGAI AIR</th>
           <th colspan="2" style="text-align:center;vertical-align: middle;background-color:#Dcdedb;">TANJUNG</th>
@@ -2424,6 +2565,8 @@
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
           <th>M3</th>         
+          <th style="background-color:#f8ec84;">Btg</th>
+          <th style="background-color:#f8ec84;">M3</th>
           <th style="background-color:#Dcdedb;">Btg</th>
           <th style="background-color:#Dcdedb;">M3</th>
           <th>Btg</th>
@@ -2456,6 +2599,8 @@
           $sum_tpn2Vol = 0;
           $sum_tpk57Qty = 0;
           $sum_tpk57Vol = 0;
+          $sum_industriQty = 0;
+          $sum_industriVol = 0;
           $sum_lsdQty = 0;
           $sum_lsdVol = 0;
           $sum_lsaQty = 0;
@@ -2485,6 +2630,8 @@
             <td>{{ $jsnx['tpn2Vol'] }}</td>
             <td>{{ $jsnx['tpk57Qty'] }}</td>
             <td>{{ $jsnx['tpk57Vol'] }}</td>
+            <td style="background-color:#f8ec84;">{{ $jsnx['industriQty'] }}</td>
+            <td style="background-color:#f8ec84;">{{ $jsnx['industriVol'] }}</td>
             <td>{{ $jsnx['lsdQty'] }}</td>
             <td>{{ $jsnx['lsdVol'] }}</td>
             <td>{{ $jsnx['lsaQty'] }}</td>
@@ -2513,6 +2660,8 @@
           $sum_tpn2Vol += $jsnx['tpn2Vol'];
           $sum_tpk57Qty += $jsnx['tpk57Qty'];
           $sum_tpk57Vol += $jsnx['tpk57Vol'];
+          $sum_industriQty += $jsnx['industriQty'];
+          $sum_industriVol += $jsnx['industriVol'];
           $sum_lsdQty += $jsnx['lsdQty'];
           $sum_lsdVol += $jsnx['lsdVol'];
           $sum_lsaQty += $jsnx['lsaQty'];
@@ -2541,6 +2690,8 @@
           <th style="background-color: #Dcdedb;">{{ $sum_tpn2Vol }}</th>
           <th style="background-color: #Dcdedb;">{{ $sum_tpk57Qty }}</th>
           <th style="background-color: #Dcdedb;">{{ $sum_tpk57Vol }}</th>
+          <th style="background-color: #f8ec84;">{{ $sum_industriQty }}</th>
+          <th style="background-color: #f8ec84;">{{ $sum_industriVol }}</th>
           <th style="background-color: #Dcdedb;">{{ $sum_lsdQty }}</th>
           <th style="background-color: #Dcdedb;">{{ $sum_lsdVol }}</th>
           <th style="background-color: #Dcdedb;">{{ $sum_lsaQty }}</th>

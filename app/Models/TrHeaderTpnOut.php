@@ -32,6 +32,7 @@ class TrHeaderTpnOut extends Model
         'bongkarUnit',
         'optAngkut',
         'angkutUnit',
+        'kapalTongkang',
         'kode_periode',        
         'user_updated',
         'user_created',
