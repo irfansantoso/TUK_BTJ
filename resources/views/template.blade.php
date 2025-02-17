@@ -427,8 +427,8 @@
               @endauth
             </ul>
           </li>
-          <li class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
-            <a href="#" class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
+          <li class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapIndustri','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+            <a href="#" class="{{ request()->is('rptStokKayu','rptStokPerThn','rptStokPerThnDia','rptChainTrack','rptLoglistLoc','rptStokLoc','rptStokLocDet','rptRekapHauling','rptRekapIndustri','rptRekapTkg','rptRekapPerlokPertahun','rptStokAkhGab') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-sticky-note"></i>
               <p>
                 Laporan
@@ -482,6 +482,12 @@
                 <a href="{{ route('rptRekapHauling') }}" class="{{ request()->is('rptRekapHauling') ? 'nav-link active' : 'nav-link' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Hauling</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('rptRekapIndustri') }}" class="{{ request()->is('rptRekapIndustri') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rekap Industri</p>
                 </a>
               </li>
               <li class="nav-item">

@@ -248,6 +248,9 @@ Route::post('rptStokLocDet', [UserController::class, 'rptStokLocDet_rpt'])->name
 Route::get('rptRekapHauling',[UserController::class, 'rptRekapHauling'])->name('rptRekapHauling')->middleware('auth');
 Route::post('rptRekapHauling', [UserController::class, 'rptRekapHauling_rpt'])->name('rptRekapHauling.rpt')->middleware('auth');
 
+Route::get('rptRekapIndustri',[UserController::class, 'rptRekapIndustri'])->name('rptRekapIndustri')->middleware('auth');
+Route::post('rptRekapIndustri', [UserController::class, 'rptRekapIndustri_rpt'])->name('rptRekapIndustri.rpt')->middleware('auth');
+
 Route::get('rptRekapTkg',[UserController::class, 'rptRekapTkg'])->name('rptRekapTkg')->middleware('auth');
 Route::post('rptRekapTkg', [UserController::class, 'rptRekapTkg_rpt'])->name('rptRekapTkg.rpt')->middleware('auth');
 

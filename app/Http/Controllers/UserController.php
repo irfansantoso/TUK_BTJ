@@ -26,6 +26,7 @@ use App\Exports\UserExport_3;
 use App\Exports\UserExport_4;
 use App\Exports\UserExport_4_detail;
 use App\Exports\UserExport_5;
+use App\Exports\UserExport_5_industri;
 use App\Exports\UserExport_6;
 use App\Exports\UserExport_7;
 use App\Exports\UserExport_8;
@@ -6587,6 +6588,77 @@ class UserController extends Controller
             return redirect()->route('rptRekapHauling',[$request->lokasi])
                             ->with('lokasi', $getNmLok[0]['nama_lokasi'])
                             ->with('tgl_laporan', $request->tgl_laporan)
+                            ->with('getSel', $array);
+        }
+    }
+
+    //------------------------Report Rekap Industri--------------------------------//
+
+    public function rptRekapIndustri(Request $request)
+    {
+        $dateNow = Carbon::now();
+        $dtNow = date("Y-m-d", strtotime($dateNow));
+        $lokIndustri = Lokasi::where('kode_lokasi','>=',650)
+                          ->where('kode_lokasi', '<=', 698)->get();
+        $data['title'] = 'Rekap Penerimaan Tongkang';
+        return view('reporting/rptRekapIndustri', $data,compact('dtNow','lokIndustri'));
+    }
+
+    public function rptRekapIndustri_rpt(Request $request)
+    {   
+        $pieces = explode("-", $request->tgl_laporan);
+        $startDt = $pieces[0];
+        $endDt = $pieces[1];
+        $strDt = date("Y-m-d", strtotime($startDt));
+        $eDt = date("Y-m-d", strtotime($endDt));
+        $dateNow = Carbon::now();
+        $dtNow = date("d-m-Y", strtotime($dateNow));
+        $thn_prod_s = $request->thn_produksi_start;
+        $thn_prod_e = $request->thn_produksi_end;
+
+        $lokasi = $request->lokasi;
+
+        $getSel = DB::select(DB::raw("SELECT k.nama_kayu as namakayu,
+                                            sum(e.low) as lowQty,
+                                            round(sum(e.lowVol),2) as lowVol,
+                                            sum(e.middle) as middleQty,
+                                            round(sum(e.middleVol),2) as middleVol,
+                                            sum(e.high) as highQty,
+                                            round(sum(e.highVol),2) as highVol,
+                                            sum(e.low)+sum(e.middle)+sum(e.high) as totalQty,
+                                            round(sum(e.lowVol)+sum(e.middleVol)+sum(e.highVol),2) as totalVol
+                                        FROM (SELECT tdti.jns_kayu,
+                                                   CASE WHEN tdti.kelas = '40-49' THEN 1 ELSE 0 END as low,
+                                                       CASE WHEN tdti.kelas = '40-49' THEN tdti.vol ELSE 0 END as lowVol,
+                                                       CASE WHEN tdti.kelas = '50-59' THEN 1 ELSE 0 END as middle,
+                                                       CASE WHEN tdti.kelas = '50-59' THEN tdti.vol ELSE 0 END as middleVol,
+                                                       CASE WHEN tdti.kelas = '60 Up' THEN 1 ELSE 0 END as high,
+                                                       CASE WHEN tdti.kelas = '60 Up' THEN tdti.vol ELSE 0 END as highVol
+                                              FROM tr_detail_position tdp
+                                              LEFT JOIN tr_detail_tpn_in tdti ON tdp.no_btg = tdti.no_btg 
+                                              LEFT JOIN tr_header_tpn_out thto ON tdp.id_header = thto.id_header_tpn_out 
+                                              WHERE tdti.thn_produksi_tpn >= '$thn_prod_s' and tdti.thn_produksi_tpn <= '$thn_prod_e' and tdp.position = 'current' and tdp.to_lokasi = '$request->lokIndustri' and tdp.tgl_input >= '$strDt' and tdp.tgl_input <= '$eDt' and thto.tujuan = '$request->lokIndustri') e LEFT JOIN mstr_kayu k ON e.jns_kayu = k.kode_kayu
+                                        GROUP BY k.nama_kayu"));
+
+        $array = json_decode(json_encode($getSel), true);
+
+        $getNmIndustri = Lokasi::where('kode_lokasi','=',$request->lokIndustri)
+                            ->get(['nama_lokasi']);
+        $nmIndustri = isset($getNmIndustri[0]['nama_lokasi']) ? $getNmIndustri[0]['nama_lokasi'] : null;
+        
+        if($request->jnsLap == "xls")
+        {
+            $fileNm = "Rekap Industri (".$nmIndustri.").xlsx";
+            return Excel::download(new UserExport_5_industri($nmIndustri,$strDt,$eDt,$thn_prod_s,$thn_prod_e,$array), $fileNm);
+        }else{
+            
+            return redirect()->route('rptRekapIndustri',[])
+                            ->with('lokIndustri', $request->lokIndustri)
+                            ->with('namaIndustri', $nmIndustri)
+                            ->with('strDt', $strDt)
+                            ->with('eDt', $eDt)
+                            ->with('thn_prod_s', $thn_prod_s)
+                            ->with('thn_prod_e', $thn_prod_e)
                             ->with('getSel', $array);
         }
     }
